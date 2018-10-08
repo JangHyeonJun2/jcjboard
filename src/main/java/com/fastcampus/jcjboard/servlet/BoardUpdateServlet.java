@@ -1,3 +1,5 @@
+package com.fastcampus.jcjboard.servlet;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,6 +11,6 @@ import java.io.IOException;
 public class BoardUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        
+
     }
 }
