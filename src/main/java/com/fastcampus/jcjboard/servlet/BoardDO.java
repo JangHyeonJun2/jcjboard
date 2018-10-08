@@ -1,0 +1,70 @@
+package com.fastcampus.jcjboard.servlet;
+
+import java.time.LocalDate;
+
+public class BoardDO {
+    private int id;
+    private  String title;
+    private  String content;
+    private LocalDate date;
+    private String password;
+    private String nickname;
+    public BoardDO(){
+
+    }
+
+    public BoardDO(String title, String content, String password, String nickname) {
+        this.title = title;
+        this.content = content;
+        this.password = password;
+        this.nickname = nickname;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public String getContent() {
+        return content;
+    }
+
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setContent(String content) {
+        this.content = content;
+    }
+
+    public void setDate(LocalDate date) {
+        this.date = date;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
+}
