@@ -18,5 +18,6 @@
         TITLE : ${BoardDO.title}<br>
         CONTENT : ${BoardDO.content}<br>
     </c:forEach>
+    <a href="/board/list">목록</a>
 </body>
 </html>
