@@ -17,15 +17,11 @@ public class BoardDeleteServlet extends HttpServlet {
         String password = req.getParameter("password");
         String id = req.getParameter("id");
 
-        /**/
-        //Daoread 완성되면, 그걸로 DBpassword 가져오기
-        //해당 id의 passwword로
-         /**/
-        String DBpassword = password; //현재는 무조건 삭제
+        BoardDaoDelete boardDaoDelete =new BoardDaoDelete();
+        String DBpassword = boardDaoDelete.getDbPassword(id);
 
         if (password.equals(DBpassword)) {
             //패스워드가 맞다면, 해당 DB를 삭제한다.
-            BoardDaoDelete boardDaoDelete =new BoardDaoDelete();
             boardDaoDelete.deleteDB(id);
         }
 
