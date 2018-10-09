@@ -1,5 +1,7 @@
 package com.fastcampus.jcjboard.servlet;
 
+import com.fastcampus.jcjboard.dao.BoardDaoWrite;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -19,6 +21,7 @@ public class BoardWriteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         //글쓰기 폼태그로부터 글 입력정보를 받는다.
         String nickName = req.getParameter("nickname");
         String title = req.getParameter("title");
@@ -36,6 +39,8 @@ public class BoardWriteServlet extends HttpServlet {
         BoardDO boardDO = new BoardDO(title,content,password,nickName);
 
         //DB에 저장한다.
+        BoardDaoWrite boardDaoWrite = new BoardDaoWrite();
+        boardDaoWrite.addBoardDO(boardDO);
 
         //게시판 목록으로 리다이렉트한다.
         resp.sendRedirect("/board/list");
