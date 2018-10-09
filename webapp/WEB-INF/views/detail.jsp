@@ -17,7 +17,8 @@
         NAME : ${BoardDO.nickname}<br>
         TITLE : ${BoardDO.title}<br>
         CONTENT : ${BoardDO.content}<br>
+        <a href="/board/list">목록</a> <a href="/board/update?id=${BoardDO.id}">수정</a>
     </c:forEach>
-    <a href="/board/list">목록</a>
+
 </body>
 </html>
