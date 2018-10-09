@@ -5,7 +5,10 @@ import com.fastcampus.jcjboard.servlet.BoardDO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class BoardDao {
@@ -22,7 +25,7 @@ public class BoardDao {
         try {
 
             conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql ="select boardid,nickname,title,content from board";
+            String sql ="select boardid,nickname,title,content,regdate from board";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -32,8 +35,16 @@ public class BoardDao {
                 board.setNickname(rs.getString(2));
                 board.setTitle(rs.getString(3));
                 board.setContent(rs.getString(4));
+
+                Date dbDate = rs.getDate(5);
+                java.util.Date date = new Date(dbDate.getTime());
+                LocalDateTime ldt = date.toInstant()
+                        .atZone(ZoneId.systemDefault())
+                        .toLocalDateTime();
+                board.setDate(ldt);
                 list.add(board);
-                System.out.println(board.getId() + board.getContent());
+                System.out.println(board.getId() + board.getContent() + "    regdate : " + board.getDate());
+                System.out.println("dbdate  : " + date);
             }
 
 

@@ -20,5 +20,36 @@
 ${ boardSize } <br>
 
 
+<div id="list">
+    <table border="1px solid-black" >
+        <thead>
+            <tr>
+                <th width ="80px">번호</th>
+                <th width ="200px">제목</th>
+                <th width ="100px">닉네임</th>
+                <th width ="250px">날짜</th>
+            </tr>
+        </thead>
+        <tbody>
+                <c:forEach items="${requestScope.board}" var="bo">
+                    <tr>
+                        <td>${bo.id}</td>
+                        <td>${bo.title}</td>
+                        <td>${bo.nickname}</td>
+                        <td>${bo.date}</td>
+                    </tr>
+                </c:forEach>
+
+        </tbody>
+
+    </table>
+
+    <h2> paging~~~ </h2>
+
+</div>
+
+
+
+
 </body>
 </html>
