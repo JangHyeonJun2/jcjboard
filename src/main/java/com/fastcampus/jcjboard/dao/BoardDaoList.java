@@ -26,7 +26,7 @@ public class BoardDaoList {
         try {
 
             conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql ="select boardid,nickname,title,content,regdate from board";
+            String sql ="select boardid,nickname,title,content,regdate from board order by boardid desc";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -38,15 +38,12 @@ public class BoardDaoList {
                 board.setContent(rs.getString(4));
 
                 Date dbDate = rs.getDate(5);
-                System.out.println("최초 dbdate : " + dbDate);
                 java.util.Date date = new Date(dbDate.getTime());
                 LocalDateTime ldt = date.toInstant()
                         .atZone(ZoneId.systemDefault())
                         .toLocalDateTime();
                 board.setDate(ldt);
                 list.add(board);
-                System.out.println(board.getId() + board.getContent() + "    regdate : " + board.getDate());
-                System.out.println("dbdate  : " + date);
             }
 
 

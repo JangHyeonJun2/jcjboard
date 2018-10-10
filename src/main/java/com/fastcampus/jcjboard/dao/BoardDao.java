@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDao {
+
     private String dbUrl = "jdbc:mariadb://localhost:3306/Test_db";
     private String dbId = "siyoon";
     private String dbPassword = "1234";
