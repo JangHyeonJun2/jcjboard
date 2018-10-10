@@ -7,15 +7,15 @@ import java.time.LocalDate;
 
 
 public class BoardDaoDelete {
-    private String dbUrl="jdbc:mysql://localhost:3306/jcjboard?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
+    private String dbUrl = "jdbc:mysql://localhost:3306/jcjboard?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
     private String dbId = "root";
-    private String dbPassword = "1234";
+    private String dbPassword = "0653";
 
     public BoardDaoDelete() {
 
     }
 
-    public int deleteDB(String boardid) {
+    public int deleteDB(int boardid) {
         int count =0;
         String sql = "DELETE FROM board WHERE boardid = ?";
         Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
@@ -23,7 +23,7 @@ public class BoardDaoDelete {
 
         try {
             ps = conn.prepareStatement(sql);
-            ps.setString(1,boardid);
+            ps.setInt(1,boardid);
             count = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -33,7 +33,7 @@ public class BoardDaoDelete {
         return count;
     }
 
-    public String getDbPassword(String boardid) {
+    public String getDbPassword(int boardid) {
         Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
         PreparedStatement ps = null;
         ResultSet rs = null;
@@ -43,7 +43,7 @@ public class BoardDaoDelete {
 
         try {
             ps = conn.prepareStatement(sql);
-            ps.setString(1,boardid);
+            ps.setInt(1,boardid);
 
             rs = ps.executeQuery();
             if (rs.next()) {

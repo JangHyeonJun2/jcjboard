@@ -8,7 +8,8 @@ public class DbUtil {
 
         Connection conn = null;
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
+            //Class.forName("com.mysql.cj.jdbc.Driver");
+            Class.forName("org.mariadb.jdbc.Driver");
             conn = DriverManager.getConnection(dbUrl,dbId,dbPassword);
 
         }catch (Exception ex) {

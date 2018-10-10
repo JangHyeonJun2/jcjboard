@@ -35,15 +35,21 @@ public class BoardUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
+
+        int id = Integer.parseInt(req.getParameter("id"));
+        String name = req.getParameter("nickname");
         String title = req.getParameter("title");
         String content = req.getParameter("content");
 
+        //BoardDO boardDO = new BoardDO(id,title,content);
         BoardDO boardDO = new BoardDO();
+        boardDO.setId(id);
+        boardDO.setNickname(name);
         boardDO.setTitle(title);
         boardDO.setContent(content);
+        BoardDao boardDao = new BoardDao();
+        boardDao.updateBoardDO(boardDO);
 
-        BoardDao boardDao2 =new BoardDao();
-        boardDao2.updateBoardDO(boardDO);
         /*
         RequestDispatcher dispatcher =
                 req.getRequestDispatcher("/WEB-INF/views/list.jsp");

@@ -10,8 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDao {
-    private String dbUrl="jdbc:mysql://localhost:3306/jcjboard?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
-    private String dbId = "root";
+
+    private String dbUrl = "jdbc:mariadb://localhost:3306/Test_db";
+    private String dbId = "siyoon";
     private String dbPassword = "1234";
 
     public List<BoardDO> getBoardList() {
@@ -87,10 +88,13 @@ public class BoardDao {
         PreparedStatement ps = null;
         try{
             conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql2 =  "update board set title=?,content=?";
+            String sql2 =  "update board set  nickname=?,title=?,content=? where boardid=? ";
             ps = conn.prepareStatement(sql2);
-            ps.setString(1,boardDO.getTitle());
-            ps.setString(2,boardDO.getContent());
+
+            ps.setString(1,boardDO.getNickname());
+            ps.setString(2,boardDO.getTitle());
+            ps.setString(3,boardDO.getContent());
+            ps.setInt(4,boardDO.getId());
             count = ps.executeUpdate();
         }catch (SQLException sqle){
             sqle.printStackTrace();
