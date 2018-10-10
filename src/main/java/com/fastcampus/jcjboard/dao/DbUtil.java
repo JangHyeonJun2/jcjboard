@@ -3,7 +3,6 @@ package com.fastcampus.jcjboard.dao;
 import java.sql.*;
 
 public class DbUtil {
-
     public static Connection connect(String dbUrl, String dbId, String dbPassword)
         throws RuntimeException {
 
@@ -48,6 +47,7 @@ public class DbUtil {
         }
         close(conn,ps);
     }
+
 
 }
 
