@@ -20,6 +20,10 @@
 ${ boardSize } <br>
 
 
+<a href="/board/write"><input type="button" value="Write"></a>
+
+
+
 <div id="list">
     <table border="1px solid-black" >
         <thead>
@@ -34,7 +38,7 @@ ${ boardSize } <br>
                 <c:forEach items="${requestScope.board}" var="bo">
                     <tr>
                         <td>${bo.id}</td>
-                        <td>${bo.title}</td>
+                        <td><a href="/board/read?id=${bo.id}"> ${bo.title}</a></td>
                         <td>${bo.nickname}</td>
                         <td>${bo.date}</td>
                     </tr>

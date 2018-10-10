@@ -12,8 +12,9 @@ import java.util.Date;
 import java.util.List;
 
 public class BoardDaoList {
-    private String dbUrl="jdbc:mysql://localhost:3306/jcjboard?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
-    private String dbId = "root";
+
+    private String dbUrl = "jdbc:mariadb://localhost:3306/Test_db";
+    private String dbId = "siyoon";
     private String dbPassword = "1234";
 
     public List<BoardDO> getBoardList() {
@@ -25,7 +26,7 @@ public class BoardDaoList {
         try {
 
             conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql ="select boardid,nickname,title,content,regdate from board";
+            String sql ="select boardid,nickname,title,content,regdate from board order by boardid desc";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
@@ -37,15 +38,12 @@ public class BoardDaoList {
                 board.setContent(rs.getString(4));
 
                 Date dbDate = rs.getDate(5);
-                System.out.println("최초 dbdate : " + dbDate);
                 java.util.Date date = new Date(dbDate.getTime());
                 LocalDateTime ldt = date.toInstant()
                         .atZone(ZoneId.systemDefault())
                         .toLocalDateTime();
                 board.setDate(ldt);
                 list.add(board);
-                System.out.println(board.getId() + board.getContent() + "    regdate : " + board.getDate());
-                System.out.println("dbdate  : " + date);
             }
 
 
