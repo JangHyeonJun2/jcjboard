@@ -10,6 +10,7 @@ import java.time.LocalDate;
 
 
 public class BoardDaoWrite {
+
     private String dbUrl;
     private String dbId;
     private String dbPassword;

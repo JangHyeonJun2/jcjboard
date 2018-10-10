@@ -7,6 +7,7 @@ import java.time.LocalDate;
 
 
 public class BoardDaoDelete {
+
     private String dbUrl;
     private String dbId;
     private String dbPassword;
