@@ -12,6 +12,7 @@ import java.util.Date;
 import java.util.List;
 
 public class BoardDaoList {
+
     private String dbUrl = "jdbc:mariadb://localhost:3306/Test_db";
     private String dbId = "siyoon";
     private String dbPassword = "1234";
