@@ -7,11 +7,15 @@ import java.time.LocalDate;
 
 
 public class BoardDaoDelete {
-    private String dbUrl = "jdbc:mariadb://localhost:3306/Test_db";
-    private String dbId = "siyoon";
-    private String dbPassword = "1234";
+    private String dbUrl;
+    private String dbId;
+    private String dbPassword;
 
     public BoardDaoDelete() {
+        DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+        this.dbUrl = dbConfiguration.getDbUrl();
+        this.dbId = dbConfiguration.getDbId();
+        this.dbPassword = dbConfiguration.getDbPassword();
 
     }
 
