@@ -4,7 +4,7 @@ import java.sql.*;
 
 public class DbUtil {
     public static Connection connect(String dbUrl, String dbId, String dbPassword)
-            throws RuntimeException {
+        throws RuntimeException {
 
         Connection conn = null;
         try {
@@ -47,4 +47,7 @@ public class DbUtil {
         }
         close(conn,ps);
     }
+
+
 }
+
