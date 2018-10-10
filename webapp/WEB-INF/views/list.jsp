@@ -46,6 +46,22 @@ ${ boardSize } <br>
 
     <h2> paging~~~ </h2>
 
+    <div class="paginate">
+        <a href="" class="first">처음 페이지</a>
+        <a href="" class="prev">이전 페이지</a>
+        <span>
+        <c:forEach var="i" begin="${paging.startPageNo}" end="${paging.endPageNo}" step="1">
+            <c:choose>
+                <c:when test="${i eq paging.pageNo}"><a href="" class="choice">${i}</a></c:when>
+                <c:otherwise><a href="">${i}</a></c:otherwise>
+            </c:choose>
+        </c:forEach>
+        </span>
+        <a href="" class="next">다음 페이지</a>
+        <a href="" class="last">마지막 페이지</a>
+    </div>
+
+
 </div>
 
 
