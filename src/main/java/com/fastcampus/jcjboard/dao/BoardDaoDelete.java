@@ -7,8 +7,8 @@ import java.time.LocalDate;
 
 
 public class BoardDaoDelete {
-    private String dbUrl = "jdbc:mariadb://localhost:3306/Test_db";
-    private String dbId = "siyoon";
+    private String dbUrl="jdbc:mysql://localhost:3306/jcjboard?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
+    private String dbId = "root";
     private String dbPassword = "1234";
 
     public BoardDaoDelete() {
