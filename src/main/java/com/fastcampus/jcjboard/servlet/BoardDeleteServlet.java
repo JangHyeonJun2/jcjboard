@@ -15,7 +15,7 @@ public class BoardDeleteServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //글의 패스워드가 DB에 저장된 패스워드가  맞는지 확인한다.
         String password = req.getParameter("password");
-        String id = req.getParameter("id");
+        int id = Integer.parseInt(req.getParameter("id"));
 
         BoardDaoDelete boardDaoDelete =new BoardDaoDelete();
         String DBpassword = boardDaoDelete.getDbPassword(id);
@@ -27,5 +27,10 @@ public class BoardDeleteServlet extends HttpServlet {
 
         //게시판 목록으로 리다이렉트한다.
         resp.sendRedirect("/board/list");
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
     }
 }
