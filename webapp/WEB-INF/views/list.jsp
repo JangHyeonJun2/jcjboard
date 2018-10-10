@@ -20,6 +20,10 @@
 ${ boardSize } <br>
 
 
+<a href="/board/write"><input type="button" value="Write"></a>
+
+
+
 <div id="list">
     <table border="1px solid-black" >
         <thead>
