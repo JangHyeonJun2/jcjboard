@@ -26,8 +26,30 @@ public class BoardUpdateServlet extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/views/update.jsp");
         dispatcher.forward(req,resp);
 
+
+
+
+
+}
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        req.setCharacterEncoding("UTF-8");
         String title = req.getParameter("title");
         String content = req.getParameter("content");
-       // String sql2 =  "update board set title=?,content=?";
+
+        BoardDO boardDO = new BoardDO();
+        boardDO.setTitle(title);
+        boardDO.setContent(content);
+
+        BoardDao boardDao2 =new BoardDao();
+        boardDao2.updateBoardDO(boardDO);
+        /*
+        RequestDispatcher dispatcher =
+                req.getRequestDispatcher("/WEB-INF/views/list.jsp");
+        dispatcher.forward(req,resp);
+        */
+
+        resp.sendRedirect("/board/list");
     }
 }

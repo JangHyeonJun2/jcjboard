@@ -5,6 +5,7 @@ import com.fastcampus.jcjboard.servlet.BoardDO;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -79,5 +80,25 @@ public class BoardDao {
 
         return list;
     }
+
+    public int updateBoardDO(BoardDO boardDO){
+        int count = 0;
+        Connection conn = null;
+        PreparedStatement ps = null;
+        try{
+            conn = DbUtil.connect(dbUrl,dbId,dbPassword);
+            String sql2 =  "update board set title=?,content=?";
+            ps = conn.prepareStatement(sql2);
+            ps.setString(1,boardDO.getTitle());
+            ps.setString(2,boardDO.getContent());
+            count = ps.executeUpdate();
+        }catch (SQLException sqle){
+            sqle.printStackTrace();
+        }finally {
+            DbUtil.close(conn,ps);
+        }
+        return count;
+    }
+
 
 }
