@@ -14,11 +14,19 @@ import java.util.List;
 
 public class BoardDaoList {
 
-    private String dbUrl = "jdbc:mysql://localhost:3306/jcjboard?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
-    private String dbId = "root";
-    private String dbPassword = "1234";
+    private String dbUrl;
+    private String dbId;
+    private String dbPassword;
 
+    public BoardDaoList() {
+        DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+        this.dbUrl = dbConfiguration.getDbUrl();
+        this.dbId = dbConfiguration.getDbId();
+        this.dbPassword = dbConfiguration.getDbPassword();
+    }
+  
     public List<BoardDO> getBoardListPerPage(Paging paging2) {
+
         List<BoardDO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;

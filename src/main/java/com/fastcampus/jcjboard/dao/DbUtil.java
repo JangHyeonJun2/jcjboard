@@ -7,9 +7,9 @@ public class DbUtil {
         throws RuntimeException {
 
         Connection conn = null;
+        DBConfiguration dbConfiguration = DBConfiguration.getInstance();
         try {
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            //Class.forName("org.mariadb.jdbc.Driver");
+            Class.forName(dbConfiguration.getDbDriver());
             conn = DriverManager.getConnection(dbUrl,dbId,dbPassword);
 
         }catch (Exception ex) {
