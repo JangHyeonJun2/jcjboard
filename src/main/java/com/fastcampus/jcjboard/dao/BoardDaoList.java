@@ -13,10 +13,16 @@ import java.util.List;
 
 public class BoardDaoList {
 
-    private String dbUrl = "jdbc:mariadb://localhost:3306/Test_db";
-    private String dbId = "siyoon";
-    private String dbPassword = "1234";
+    private String dbUrl;
+    private String dbId;
+    private String dbPassword;
 
+    public BoardDaoList() {
+        DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+        this.dbUrl = dbConfiguration.getDbUrl();
+        this.dbId = dbConfiguration.getDbId();
+        this.dbPassword = dbConfiguration.getDbPassword();
+    }
     public List<BoardDO> getBoardList() {
         List<BoardDO> list = new ArrayList<>();
         Connection conn = null;

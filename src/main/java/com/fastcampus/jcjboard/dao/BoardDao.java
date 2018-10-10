@@ -11,9 +11,16 @@ import java.util.List;
 
 public class BoardDao {
 
-    private String dbUrl = "jdbc:mariadb://localhost:3306/Test_db";
-    private String dbId = "siyoon";
-    private String dbPassword = "1234";
+    private String dbUrl;
+    private String dbId;
+    private String dbPassword;
+
+    public BoardDao() {
+        DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+        this.dbUrl = dbConfiguration.getDbUrl();
+        this.dbId = dbConfiguration.getDbId();
+        this.dbPassword = dbConfiguration.getDbPassword();
+    }
 
     public List<BoardDO> getBoardList() {
         List<BoardDO> list = new ArrayList<>();
@@ -23,12 +30,12 @@ public class BoardDao {
 
         try {
 
-            conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql ="select boardid,nickname,title,content from board";
+            conn = DbUtil.connect(dbUrl, dbId, dbPassword);
+            String sql = "select boardid,nickname,title,content from board";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 BoardDO board = new BoardDO();
                 board.setId(rs.getInt(1));
                 board.setNickname(rs.getString(2));
@@ -39,10 +46,10 @@ public class BoardDao {
             }
 
 
-        }catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }finally {
-            DbUtil.close(conn,ps,rs);
+        } finally {
+            DbUtil.close(conn, ps, rs);
         }
 
         return list;
@@ -57,12 +64,12 @@ public class BoardDao {
 
         try {
 
-            conn = DbUtil.connect(dbUrl,dbId,dbPassword);
+            conn = DbUtil.connect(dbUrl, dbId, dbPassword);
             //String sql ="select boardid,nickname,title,content from board";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 
-            while(rs.next()) {
+            while (rs.next()) {
                 BoardDO board = new BoardDO();
                 board.setId(rs.getInt(1));
                 board.setNickname(rs.getString(2));
@@ -73,33 +80,33 @@ public class BoardDao {
             }
 
 
-        }catch(Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
-        }finally {
-            DbUtil.close(conn,ps,rs);
+        } finally {
+            DbUtil.close(conn, ps, rs);
         }
 
         return list;
     }
 
-    public int updateBoardDO(BoardDO boardDO){
+    public int updateBoardDO(BoardDO boardDO) {
         int count = 0;
         Connection conn = null;
         PreparedStatement ps = null;
-        try{
-            conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql2 =  "update board set  nickname=?,title=?,content=? where boardid=? ";
+        try {
+            conn = DbUtil.connect(dbUrl, dbId, dbPassword);
+            String sql2 = "update board set  nickname=?,title=?,content=? where boardid=? ";
             ps = conn.prepareStatement(sql2);
 
-            ps.setString(1,boardDO.getNickname());
-            ps.setString(2,boardDO.getTitle());
-            ps.setString(3,boardDO.getContent());
-            ps.setInt(4,boardDO.getId());
+            ps.setString(1, boardDO.getNickname());
+            ps.setString(2, boardDO.getTitle());
+            ps.setString(3, boardDO.getContent());
+            ps.setInt(4, boardDO.getId());
             count = ps.executeUpdate();
-        }catch (SQLException sqle){
+        } catch (SQLException sqle) {
             sqle.printStackTrace();
-        }finally {
-            DbUtil.close(conn,ps);
+        } finally {
+            DbUtil.close(conn, ps);
         }
         return count;
     }
