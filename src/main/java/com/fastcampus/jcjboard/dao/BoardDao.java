@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class BoardDao {
-    private String dbUrl="jdbc:mysql://localhost:3306/jcjboard?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
-    private String dbId = "root";
-    private String dbPassword = "0653";
+    private String dbUrl = "jdbc:mariadb://localhost:3306/Test_db";
+    private String dbId = "siyoon";
+    private String dbPassword = "1234";
 
     public List<BoardDO> getBoardList() {
         List<BoardDO> list = new ArrayList<>();
