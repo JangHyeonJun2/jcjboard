@@ -1,6 +1,6 @@
 package com.fastcampus.jcjboard.servlet;
 
-import com.fastcampus.jcjboard.dao.BoardDao;
+import com.fastcampus.jcjboard.dao.BoardDaoList;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,7 +16,7 @@ public class BoardListServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        BoardDao dao = new BoardDao();
+        BoardDaoList dao = new BoardDaoList();
         List<BoardDO> list = dao.getBoardList();
 
 

@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class BoardDao {
+public class BoardDaoList {
     private String dbUrl="jdbc:mysql://localhost:3306/jcjboard?useSSL=false&serverTimezone=UTC&useUnicode=true&characterEncoding=UTF-8";
     private String dbId = "root";
     private String dbPassword = "1234";
@@ -37,6 +37,7 @@ public class BoardDao {
                 board.setContent(rs.getString(4));
 
                 Date dbDate = rs.getDate(5);
+                System.out.println("최초 dbdate : " + dbDate);
                 java.util.Date date = new Date(dbDate.getTime());
                 LocalDateTime ldt = date.toInstant()
                         .atZone(ZoneId.systemDefault())
