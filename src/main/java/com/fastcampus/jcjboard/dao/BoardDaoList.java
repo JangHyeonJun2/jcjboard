@@ -2,7 +2,9 @@ package com.fastcampus.jcjboard.dao;
 
 import com.fastcampus.jcjboard.paging.Paging;
 import com.fastcampus.jcjboard.servlet.BoardDO;
+import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -14,18 +16,28 @@ import java.util.List;
 
 public class BoardDaoList {
 
+
+ 
     private String dbUrl;
     private String dbId;
     private String dbPassword;
 
     public BoardDaoList() {
-        DBConfiguration dbConfiguration = DBConfiguration.getInstance();
-        this.dbUrl = dbConfiguration.getDbUrl();
-        this.dbId = dbConfiguration.getDbId();
-        this.dbPassword = dbConfiguration.getDbPassword();
+        GetPropertyValue getPropertyValue = new GetPropertyValue();
+        // DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+        try {
+            getPropertyValue.getPropValues();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.dbUrl = getPropertyValue.getDbUri();
+        this.dbId = getPropertyValue.getDbUser();
+        this.dbPassword = getPropertyValue.getDbPassword();
+        System.out.println(dbUrl + "," + dbId + "," + dbPassword);
     }
-  
+
     public List<BoardDO> getBoardListPerPage(Paging paging2) {
+
 
         List<BoardDO> list = new ArrayList<>();
         Connection conn = null;
@@ -75,6 +87,7 @@ public class BoardDaoList {
         PreparedStatement ps = null;
         ResultSet rs = null;
         int result =0;
+
 
         try {
 

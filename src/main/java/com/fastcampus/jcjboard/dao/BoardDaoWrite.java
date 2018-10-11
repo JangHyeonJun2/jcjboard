@@ -1,7 +1,9 @@
 package com.fastcampus.jcjboard.dao;
 
 import com.fastcampus.jcjboard.servlet.BoardDO;
+import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.PreparedStatement;
@@ -11,15 +13,28 @@ import java.time.LocalDate;
 
 public class BoardDaoWrite {
 
+
+    /*
+    private String dbUrl = "jdbc:mysql://localhost:3306/jcjboard?serverTimezone=UTC&useSSL=false";
+    private String dbId = "root";
+    private String dbPassword = "0653";
+    */
     private String dbUrl;
     private String dbId;
     private String dbPassword;
 
     public BoardDaoWrite() {
-        DBConfiguration dbConfiguration = DBConfiguration.getInstance();
-        this.dbUrl = dbConfiguration.getDbUrl();
-        this.dbId = dbConfiguration.getDbId();
-        this.dbPassword = dbConfiguration.getDbPassword();
+        GetPropertyValue getPropertyValue = new GetPropertyValue();
+        //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+        try {
+            getPropertyValue.getPropValues();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.dbUrl = getPropertyValue.getDbUri();
+        this.dbId = getPropertyValue.getDbUser();
+        this.dbPassword = getPropertyValue.getDbPassword();
+
     }
 
     public int addBoardDO(BoardDO boardDO) {
