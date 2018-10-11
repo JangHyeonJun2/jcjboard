@@ -81,6 +81,7 @@
                 </div>
 
                 <button style="text-align: center" type="button" onclick="window.location.href='/board/write'" class="ui two wide column right floated primary button">
+                    <i class="icon edit"></i>
                     글쓰기
                 </button>
             </div>
