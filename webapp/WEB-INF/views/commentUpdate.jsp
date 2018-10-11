@@ -29,6 +29,10 @@
 
 
 
+    <form method="post" accept-charset="UTF-8" action="/board/comment/delete">
+        
+        <button type="submit">삭제!</button>
+    </form>
 
 </body>
 </html>
