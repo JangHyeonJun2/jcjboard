@@ -8,9 +8,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <title>$Title$</title>
+    <title>댓글쓰기 데모페이지</title>
 </head>
 <body>
-$END$
+
+<form method="post" action="/board/comment/write">
+    이름 : <input type="text" name="nickname"><br>
+    비밀번호 : <input type="password" name="password"> <br>
+    내용 : <textarea name="content"></textarea><br>
+    글ID(데모용) : <input type="number" name="boardid"><br>
+    <button type="submit">댓글쓰기</button>
+</form>
 </body>
 </html>

@@ -2,72 +2,67 @@ package com.fastcampus.jcjboard.servlet;
 
 import java.time.LocalDateTime;
 
-public class BoardDO {
-    private int id;
-    private  String title;
-    private  String content;
+public class CommentVO {
+    private int commentid;
+    private int boardid;
+    private String content;
     private LocalDateTime date;
     private String password;
     private String nickname;
-    public BoardDO(){
+
+    public CommentVO(){
 
     }
-    /*
-    public BoardDO(int id,String title,String content){
-        this.id = id;
-        this.title = title;
-        this.content = content;
-    }
-    */
-    public BoardDO(String title, String content, String password, String nickname) {
-        this.title = title;
+
+    public CommentVO(String content, String password, String nickname, int boardid) {
         this.content = content;
         this.password = password;
         this.nickname = nickname;
+        this.boardid=boardid;
     }
 
-    public int getId() {
-        return id;
+    public int getCommentid() {
+        return commentid;
     }
 
-    public String getTitle() {
-        return title;
+    public void setCommentid(int commentid) {
+        this.commentid = commentid;
+    }
+
+    public int getBoardid() {
+        return boardid;
+    }
+
+    public void setBoardid(int boardid) {
+        this.boardid = boardid;
     }
 
     public String getContent() {
         return content;
     }
 
-    public LocalDateTime getDate() {
-        return date;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
     public void setContent(String content) {
         this.content = content;
+    }
+
+    public LocalDateTime getDate() {
+        return date;
     }
 
     public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getNickname() {
+        return nickname;
     }
 
     public void setNickname(String nickname) {
