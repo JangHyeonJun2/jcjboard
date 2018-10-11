@@ -10,6 +10,7 @@ public class DbUtil {
         throws RuntimeException {
 
         Connection conn = null;
+
         //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
         GetPropertyValue getPropertyValue = new GetPropertyValue();
         try {
@@ -22,6 +23,7 @@ public class DbUtil {
             Class.forName(getPropertyValue.getDbDriver());
 
            // Class.forName(getPropertyValue.getDbDriver());
+
 
             conn = DriverManager.getConnection(dbUrl,dbId,dbPassword);
             System.out.println(dbUrl+","+dbId+","+dbPassword);

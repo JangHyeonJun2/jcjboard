@@ -13,6 +13,7 @@ import java.time.LocalDate;
 
 public class BoardDaoWrite {
 
+
     /*
     private String dbUrl = "jdbc:mysql://localhost:3306/jcjboard?serverTimezone=UTC&useSSL=false";
     private String dbId = "root";
@@ -33,6 +34,7 @@ public class BoardDaoWrite {
         this.dbUrl = getPropertyValue.getDbUri();
         this.dbId = getPropertyValue.getDbUser();
         this.dbPassword = getPropertyValue.getDbPassword();
+
     }
 
     public int addBoardDO(BoardDO boardDO) {

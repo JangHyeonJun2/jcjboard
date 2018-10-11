@@ -9,16 +9,13 @@ import java.time.LocalDate;
 
 
 public class BoardDaoDelete {
-    /*
-    private String dbUrl = "jdbc:mysql://localhost:3306/jcjboard?serverTimezone=UTC&useSSL=false";
-    private String dbId = "root";
-    private String dbPassword = "0653";
-    */
+
     private String dbUrl;
     private String dbId;
     private String dbPassword;
 
     public BoardDaoDelete() {
+
         GetPropertyValue getPropertyValue = new GetPropertyValue();
         //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
         try {
@@ -29,6 +26,8 @@ public class BoardDaoDelete {
         this.dbUrl = getPropertyValue.getDbUri();
         this.dbId = getPropertyValue.getDbUser();
         this.dbPassword = getPropertyValue.getDbPassword();
+
+        
 
     }
 

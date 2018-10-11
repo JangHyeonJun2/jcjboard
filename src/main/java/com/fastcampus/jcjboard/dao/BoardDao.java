@@ -15,14 +15,10 @@ import java.util.List;
 public class BoardDao {
 
 
-    /*
-    private String dbUrl = "jdbc:mysql://localhost:3306/jcjboard?serverTimezone=UTC&useSSL=false";
-    private String dbId = "root";
-    private String dbPassword = "0653";
-    */
     private String dbUrl;
     private String dbId;
     private String dbPassword;
+
 
 
     public BoardDao() {
