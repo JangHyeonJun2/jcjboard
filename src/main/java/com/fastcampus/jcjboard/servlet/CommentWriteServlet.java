@@ -1,7 +1,6 @@
 package com.fastcampus.jcjboard.servlet;
 
 import com.fastcampus.jcjboard.dao.CommentDaoWrite;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -29,6 +28,7 @@ public class CommentWriteServlet extends HttpServlet {
             resp.sendRedirect("/board/list");
             return;
         }
+
 
         //댓글 객체에 생성, 내용저장
         CommentVO commentVO = new CommentVO(content,password,nickName,boardid);
