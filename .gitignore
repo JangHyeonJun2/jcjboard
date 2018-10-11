@@ -91,4 +91,4 @@ buildNumber.properties
 .idea
 
 # Avoid conflict db2(DBMS configuration)
-src/main/resources/db2.properties
+src/main/resources/db2
