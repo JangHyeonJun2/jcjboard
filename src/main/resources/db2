@@ -1,0 +1,5 @@
+{
+    dbUrl = "jdbc:mysql://localhost:3306/jcjboard?serverTimezone=UTC&useSSL=false";
+    dbId = "root";
+    dbPassword = "0653";
+}

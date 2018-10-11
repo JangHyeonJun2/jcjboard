@@ -13,9 +13,9 @@ import java.util.List;
 
 public class BoardDaoList {
 
-    private String dbUrl = "jdbc:mariadb://localhost:3306/Test_db";
-    private String dbId = "siyoon";
-    private String dbPassword = "1234";
+    private String dbUrl = "jdbc:mysql://localhost:3306/jcjboard?serverTimezone=UTC&useSSL=false";
+    private String dbId = "root";
+    private String dbPassword = "0653";
 
     public List<BoardDO> getBoardList() {
         List<BoardDO> list = new ArrayList<>();
