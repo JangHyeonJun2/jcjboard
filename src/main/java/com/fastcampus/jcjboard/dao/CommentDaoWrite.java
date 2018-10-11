@@ -1,4 +1,5 @@
 package com.fastcampus.jcjboard.dao;
+
 import com.fastcampus.jcjboard.servlet.CommentVO;
 import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 import java.io.IOException;
@@ -7,12 +8,14 @@ import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
+
 public class CommentDaoWrite {
     private String dbUrl;
     private String dbId;
     private String dbPassword;
     public CommentDaoWrite() {
         GetPropertyValue getPropertyValue = new GetPropertyValue();
+
         try {
             getPropertyValue.getPropValues();
         } catch (IOException e) {
@@ -27,6 +30,7 @@ public class CommentDaoWrite {
         Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
         PreparedStatement ps = null;
         String sql ="INSERT INTO comment(nickname,content,regdate,password,boardid) values (?,?,?,?,?);";
+
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1,commentVO.getNickname());
@@ -36,6 +40,8 @@ public class CommentDaoWrite {
             ps.setDate(3,date);
             ps.setString(4,commentVO.getPassword());
             ps.setInt(5,commentVO.getBoardid());
+
+
             count = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();

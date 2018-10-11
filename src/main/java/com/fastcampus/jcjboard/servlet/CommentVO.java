@@ -68,4 +68,5 @@ public class CommentVO {
     public void setNickname(String nickname) {
         this.nickname = nickname;
     }
+
 }
