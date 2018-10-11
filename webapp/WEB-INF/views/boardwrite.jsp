@@ -18,7 +18,7 @@
 </head>
 <body style="padding-top:20px">
 <div class="ui container">
-<form method="post" action="/board/write">
+<form method="post" action="/board/write" class="ui form">
         <div class="ui equal width form">
             <div class="fields">
                 <div class="field">

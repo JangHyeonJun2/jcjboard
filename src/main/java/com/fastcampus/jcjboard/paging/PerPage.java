@@ -1,7 +1,7 @@
 package com.fastcampus.jcjboard.paging;
 
 public class PerPage {
-    final int PER_PAGE_NUM = 3;
+    final int PER_PAGE_NUM = 10;
 
     private int page; // 보여줄 페이지
     private int perPageNum; // 페이지당 보여줄  페이지수

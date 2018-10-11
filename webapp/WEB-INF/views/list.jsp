@@ -21,7 +21,7 @@
 <div class="ui container">
     <h2 class="ui header"> 게시판 목록 </h2>
     <div id="list">
-        <table class="ui selectable purple celled padded table">
+        <table class="ui selectable blue striped celled padded table">
             <thead>
             <tr>
                 <th class="one wide center aligned">번호</th>
