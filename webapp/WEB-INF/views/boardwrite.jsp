@@ -16,14 +16,37 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
     <title>게시판 -글쓰기</title>
 </head>
-<body>
-    <form method="post" action="/board/write">
-        이름 :<input type="text" name="nickname"> <br>
-        제목 :<input type="text" name="title"> <br>
-        비밀번호 :<input type="password" name="password"> <br>
-        내용 :<textarea name="content"></textarea> <br>
-        <button type="submit">글쓰기</button>
-    </form>
+<body style="padding-top:20px">
+<div class="ui container">
+<form method="post" action="/board/write">
+        <div class="ui equal width form">
+            <div class="fields">
+                <div class="field">
+                    <label>닉네임</label>
+                    <input type="text" placeholder="닉네임" name="nickname">
+                </div>
+                <div class="field">
+                    <label>비밀번호</label>
+                    <input type="password" placeholder="비밀번호" name="password">
+                </div>
+            </div>
+            <div class="field">
+                <label>제목</label>
+                <input type="text" placeholder="제목을 입력해주세요." name="title">
+            </div>
+            <div class="field">
+                <label>내용</label>
+                <textarea placeholder="내용을 입력해주세요." name="content"></textarea>
+            </div>
+            <button type="submit" class="ui primary button">
+                등록
+            </button>
+            <button type="button" onclick="window.location.href='/board/list'" class="ui button">
+                취소
+            </button>
+        </div>
+</form>
+</div>
 
 </body>
 </html>
