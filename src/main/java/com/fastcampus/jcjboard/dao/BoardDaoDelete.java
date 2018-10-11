@@ -1,7 +1,9 @@
 package com.fastcampus.jcjboard.dao;
 
 import com.fastcampus.jcjboard.servlet.BoardDO;
+import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
@@ -13,10 +15,19 @@ public class BoardDaoDelete {
     private String dbPassword;
 
     public BoardDaoDelete() {
-        DBConfiguration dbConfiguration = DBConfiguration.getInstance();
-        this.dbUrl = dbConfiguration.getDbUrl();
-        this.dbId = dbConfiguration.getDbId();
-        this.dbPassword = dbConfiguration.getDbPassword();
+
+        GetPropertyValue getPropertyValue = new GetPropertyValue();
+        //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+        try {
+            getPropertyValue.getPropValues();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.dbUrl = getPropertyValue.getDbUri();
+        this.dbId = getPropertyValue.getDbUser();
+        this.dbPassword = getPropertyValue.getDbPassword();
+
+        
 
     }
 

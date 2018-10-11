@@ -1,7 +1,10 @@
 package com.fastcampus.jcjboard.dao;
 
 import com.fastcampus.jcjboard.servlet.BoardDO;
+import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
+import javax.imageio.IIOException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -11,16 +14,28 @@ import java.util.List;
 
 public class BoardDao {
 
+
     private String dbUrl;
     private String dbId;
     private String dbPassword;
 
+
+
     public BoardDao() {
-        DBConfiguration dbConfiguration = DBConfiguration.getInstance();
-        this.dbUrl = dbConfiguration.getDbUrl();
-        this.dbId = dbConfiguration.getDbId();
-        this.dbPassword = dbConfiguration.getDbPassword();
+        GetPropertyValue getPropertyValue = new GetPropertyValue();
+        //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+        try {
+            getPropertyValue.getPropValues();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        this.dbUrl = getPropertyValue.getDbUri();
+            this.dbId = getPropertyValue.getDbUser();
+            this.dbPassword = getPropertyValue.getDbPassword();
+
     }
+
 
     public List<BoardDO> getBoardList() {
         List<BoardDO> list = new ArrayList<>();
@@ -55,7 +70,7 @@ public class BoardDao {
         return list;
     }
 
-
+ //두번쨰
     public List<BoardDO> getBoardList(String sql) {
         List<BoardDO> list = new ArrayList<>();
         Connection conn = null;
