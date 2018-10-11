@@ -21,6 +21,17 @@
 <div class="ui container three column grid">
     <div class="ui column centered floated">
         <form method="post" action="/board/delete" class="ui form">
+
+            <c:if test="${requestScope.get('unvalidPassword')}">
+            <div class="ui negative message">
+                <i class="close icon"></i>
+                <div class="header">
+                    비밀번호가 맞지 않습니다.
+                </div>
+                <p>다시 시도해주세요.</p>
+            </div>
+            </c:if>
+
             <div class="field">
                 <input type="hidden" name="id" value="${requestScope.get("id")}">
                 <label>비밀번호를 입력하세요.</label>
@@ -40,4 +51,13 @@
 </div>
 
 </body>
+<script>
+    $('.message .close')
+    .on('click', function() {
+        $(this)
+            .closest('.message')
+            .transition('fade')
+        ;
+    })
+;</script>
 </html>

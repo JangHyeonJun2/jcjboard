@@ -1,4 +1,4 @@
-dbUrl = jdbc:mysql://localhost:3306/jcjboard?serverTimezone=UTC&useSSL=false
-dbId = root
+dbUrl = jdbc:mariadb://localhost:3306/Test_db
+dbId = siyoon
 dbPassword = 1234
-dbDriver = com.mysql.cj.jdbc.Driver
+dbDriver = org.mariadb.jdbc.Driver
