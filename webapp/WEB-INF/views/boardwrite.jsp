@@ -14,7 +14,7 @@
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
             crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
-    <title>게시판 -글쓰기</title>
+    <title>게시판 - 글쓰기</title>
 </head>
 <body style="padding-top:20px">
 <div class="ui container">
@@ -23,27 +23,30 @@
             <div class="fields">
                 <div class="field">
                     <label>닉네임</label>
-                    <input type="text" placeholder="닉네임" name="nickname">
+                    <input type="text" placeholder="닉네임" name="nickname" required>
                 </div>
                 <div class="field">
                     <label>비밀번호</label>
-                    <input type="password" placeholder="비밀번호" name="password">
+                    <input type="password" placeholder="비밀번호" name="password" required>
                 </div>
             </div>
             <div class="field">
                 <label>제목</label>
-                <input type="text" placeholder="제목을 입력해주세요." name="title">
+                <input type="text" placeholder="제목을 입력해주세요." name="title" required>
             </div>
             <div class="field">
                 <label>내용</label>
-                <textarea placeholder="내용을 입력해주세요." name="content"></textarea>
+                <textarea placeholder="내용을 입력해주세요." name="content" required></textarea>
             </div>
-            <button type="submit" class="ui primary button">
-                등록
-            </button>
-            <button type="button" onclick="window.location.href='/board/list'" class="ui button">
-                취소
-            </button>
+            <div>
+                <button type="button" onclick="window.location.href='/board/list'" class="right floated ui button">
+                    취소
+                </button>
+                <button type="submit" class="right floated ui primary button">
+                    등록
+                </button>
+            </div>
+
         </div>
 </form>
 </div>
