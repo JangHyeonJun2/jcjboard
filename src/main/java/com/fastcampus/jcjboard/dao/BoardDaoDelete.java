@@ -1,17 +1,34 @@
 package com.fastcampus.jcjboard.dao;
 
 import com.fastcampus.jcjboard.servlet.BoardDO;
+import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
+import java.io.IOException;
 import java.sql.*;
 import java.time.LocalDate;
 
 
 public class BoardDaoDelete {
+    /*
     private String dbUrl = "jdbc:mysql://localhost:3306/jcjboard?serverTimezone=UTC&useSSL=false";
     private String dbId = "root";
     private String dbPassword = "0653";
+    */
+    private String dbUrl;
+    private String dbId;
+    private String dbPassword;
 
     public BoardDaoDelete() {
+        GetPropertyValue getPropertyValue = new GetPropertyValue();
+        //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+        try {
+            getPropertyValue.getPropValues();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.dbUrl = getPropertyValue.getDbUri();
+        this.dbId = getPropertyValue.getDbUser();
+        this.dbPassword = getPropertyValue.getDbPassword();
 
     }
 

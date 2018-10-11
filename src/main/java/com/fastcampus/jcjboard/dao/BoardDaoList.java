@@ -1,7 +1,10 @@
 package com.fastcampus.jcjboard.dao;
 
+import com.fastcampus.jcjboard.paging.Paging;
 import com.fastcampus.jcjboard.servlet.BoardDO;
+import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -13,11 +16,33 @@ import java.util.List;
 
 public class BoardDaoList {
 
+
+    /*
     private String dbUrl = "jdbc:mysql://localhost:3306/jcjboard?serverTimezone=UTC&useSSL=false";
     private String dbId = "root";
     private String dbPassword = "0653";
+    */
+    private String dbUrl;
+    private String dbId;
+    private String dbPassword;
 
-    public List<BoardDO> getBoardList() {
+    public BoardDaoList() {
+        GetPropertyValue getPropertyValue = new GetPropertyValue();
+        // DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+        try {
+            getPropertyValue.getPropValues();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        this.dbUrl = getPropertyValue.getDbUri();
+        this.dbId = getPropertyValue.getDbUser();
+        this.dbPassword = getPropertyValue.getDbPassword();
+        System.out.println(dbUrl + "," + dbId + "," + dbPassword);
+    }
+
+    public List<BoardDO> getBoardListPerPage(Paging paging2) {
+
+
         List<BoardDO> list = new ArrayList<>();
         Connection conn = null;
         PreparedStatement ps = null;
@@ -26,8 +51,12 @@ public class BoardDaoList {
         try {
 
             conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql ="select boardid,nickname,title,content,regdate from board order by boardid desc";
+            String sql ="select boardid,nickname,title,content,regdate from board order by boardid desc limit ? , ?";
             ps = conn.prepareStatement(sql);
+
+            // 0~ 10까지만 가져오기.
+            ps.setInt(1,paging2.getPerPage().getPageStart());
+            ps.setInt(2,paging2.getPerPage().getPerPageNum());
             rs = ps.executeQuery();
 
             while(rs.next()) {
@@ -56,9 +85,31 @@ public class BoardDaoList {
         return list;
     }
 
+    public int getBoardListTotalCount() {
+        List<BoardDO> list = new ArrayList<>();
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        int result =0;
 
+        try {
 
+            conn = DbUtil.connect(dbUrl,dbId,dbPassword);
+            String sql ="select count(*) from board";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while(rs.next()) {
+                result = rs.getInt(1);
+            }
 
+        }catch(Exception ex) {
+            ex.printStackTrace();
+        }finally {
+            DbUtil.close(conn,ps,rs);
+        }
+
+        return result;
+    }
 
 
 }
