@@ -89,3 +89,6 @@ buildNumber.properties
 
 *.iml
 .idea
+
+# resources  db setting file.
+src/main/resources/db2
