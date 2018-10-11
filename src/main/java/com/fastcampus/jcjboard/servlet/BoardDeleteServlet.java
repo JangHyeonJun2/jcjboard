@@ -42,7 +42,13 @@ public class BoardDeleteServlet extends HttpServlet {
         BoardDaoDelete boardDaoDelete =new BoardDaoDelete();
         String DBpassword = boardDaoDelete.getDbPassword(id);
 
-        if (password.equals(DBpassword)) {
+        if (!password.equals(DBpassword)) {
+            //패스워드가 틀린경우 다시 포워딩한다.
+            req.setAttribute("unvalidPassword",true);
+            req.setAttribute("id",id);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/delete.jsp");
+            dispatcher.forward(req,resp);
+        } else if (password.equals(DBpassword)) {
             //패스워드가 맞다면, 해당 DB를 삭제한다.
             boardDaoDelete.deleteDB(id);
         }
