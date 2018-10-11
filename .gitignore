@@ -90,5 +90,5 @@ buildNumber.properties
 *.iml
 .idea
 
-# resources  db setting file.
-src/main/resources/db2
+# Avoid conflict db2(DBMS configuration)
+src/main/resources/db2.properties
