@@ -1,6 +1,6 @@
 package com.fastcampus.jcjboard.servlet;
 
-import com.fastcampus.jcjboard.dao.BoardDao;
+import com.fastcampus.jcjboard.dao.BoardDaoRead;
 import com.fastcampus.jcjboard.dao.CommentDaoWrite;
 
 import javax.servlet.RequestDispatcher;
@@ -16,7 +16,7 @@ import java.util.List;
 public class BoardReadServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        BoardDao boardDao = new BoardDao();
+        BoardDaoRead boardDao = new BoardDaoRead();
         int id = Integer.parseInt(req.getParameter("id"));
 
         String sql = "select boardid,nickname,title,content from board where boardid="+id;//글번호 id로 해당 글의 제목과 내용을 조회해온다.
@@ -29,7 +29,7 @@ public class BoardReadServlet extends HttpServlet {
 
 
         RequestDispatcher dispatcher =
-                req.getRequestDispatcher("/WEB-INF/views/detail.jsp");
+                req.getRequestDispatcher("/WEB-INF/views/read.jsp");
         dispatcher.forward(req,resp);
     }
 }
