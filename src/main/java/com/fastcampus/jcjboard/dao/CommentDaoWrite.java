@@ -3,11 +3,10 @@ package com.fastcampus.jcjboard.dao;
 import com.fastcampus.jcjboard.servlet.CommentVO;
 import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.Date;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import java.sql.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 public class CommentDaoWrite {
     private String dbUrl;
@@ -49,5 +48,29 @@ public class CommentDaoWrite {
             DbUtil.close(conn, ps);
         }
         return count;
+    }
+    public List<CommentVO> showcommentList(){
+        List<CommentVO> list = new ArrayList<>();
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        try{
+            conn =DbUtil.connect(dbUrl,dbId,dbPassword);
+            String sql = "select commentid,nickname,content,regdate,password,boardid from comment";
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while(rs.next()){
+                CommentVO commentVO = new CommentVO();
+                commentVO.setCommentid(rs.getInt(1));
+                commentVO.setNickname(rs.getString(2));
+                commentVO.setContent(rs.getString(3));
+
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 }
