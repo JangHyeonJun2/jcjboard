@@ -51,7 +51,7 @@ public class CommentDaoWrite {
         return count;
     }
 
-    public List<CommentVO> showcommentList(){
+    public List<CommentVO> showcommentList(int id){
         List<CommentVO> list = new ArrayList<>();
 
         Connection conn = null;
@@ -60,7 +60,7 @@ public class CommentDaoWrite {
 
         try{
             conn =DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql = "select commentid,nickname,content,regdate,password,boardid from comment";
+            String sql = "select commentid,nickname,content,regdate,password,boardid from comment where boardid="+id;
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 

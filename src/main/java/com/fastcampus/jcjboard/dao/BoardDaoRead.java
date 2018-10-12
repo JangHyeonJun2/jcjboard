@@ -12,7 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BoardDao {
+public class BoardDaoRead {
 
 
     private String dbUrl;
@@ -21,7 +21,7 @@ public class BoardDao {
 
 
 
-    public BoardDao() {
+    public BoardDaoRead() {
         GetPropertyValue getPropertyValue = new GetPropertyValue();
         //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
         try {
