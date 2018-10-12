@@ -15,6 +15,7 @@
 
 <form method="post" action="/board/comment/delete">
     <input type="hidden" name="commentid" value="${requestScope.get("commentid")}">
+    <input type="hidden" name="boardid" value="${requestScope.get("boardid")}">
     비밀번호 : <input type="password" name="password">
     <button type="submit">확인</button>
 </form>

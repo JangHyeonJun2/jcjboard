@@ -20,7 +20,10 @@
         <a href="/board/list">목록</a> <a href="/board/update?id=${BoardDO.id}">수정</a> <a href="/board/delete?id=${BoardDO.id}">삭제</a> <a href="/board/comment/write">댓글달기</a><br>
     </c:forEach>
     <c:forEach items="${requestScope.showComment}" var="show">
-        ID :${show.commentid} Name : ${show.nickname} Contents: ${show.content}<br>
+        ID :${show.commentid} Name : ${show.nickname} Contents: ${show.content}
+        <a href ="/board/comment/update?commentid=${show.commentid}"><button type="button">수정</button></a>
+        <a href ="/board/comment/delete?commentid=${show.commentid}&boardid=${show.boardid}"><button type="button">삭제</button></a>
+        <br>
     </c:forEach>
 
 </body>

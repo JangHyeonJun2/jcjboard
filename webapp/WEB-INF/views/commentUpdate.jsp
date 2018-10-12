@@ -27,12 +27,14 @@
 
     </form>
 
+    <a href ="/board/comment/delete?commentid=${comment.commentid}&boardid=${comment.boardid}">
+    <button type="button">삭제</button></a>
 
-
-    <form method="post" accept-charset="UTF-8" action="/board/comment/delete">
-        
-        <button type="submit">삭제!</button>
-    </form>
+    <%--<form method="post" accept-charset="UTF-8" action="/board/comment/delete">--%>
+        <%--<input type="hidden" name="commentid" value="${comment.commentid}"> <br>--%>
+        <%--<input type="hidden" name="boardid" value="${comment.boardid}"> <br>--%>
+        <%--<button type="submit">삭제!</button>--%>
+    <%--</form>--%>
 
 </body>
 </html>
