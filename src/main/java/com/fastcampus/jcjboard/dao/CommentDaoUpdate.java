@@ -47,16 +47,11 @@ public class CommentDaoUpdate {
                 comment.setCommentid(rs.getInt(1));
                 comment.setNickname(rs.getString(2));
                 comment.setContent(rs.getString(3));
-<<<<<<< HEAD
 
                 SimpleDateFormat ft =
                         new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
-                Timestamp date2 = rs.getTimestamp(5);
-=======
-                SimpleDateFormat ft =
-                        new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
                 Timestamp date2 = rs.getTimestamp(4);
->>>>>>> 6caffc4fae0b7f41a06adb899c4c7c808887b9c7
+
                 comment.setDate(ft.format(date2));
                 comment.setBoardid(rs.getInt(5));
             }
