@@ -3,7 +3,6 @@ package com.fastcampus.jcjboard.dao;
 import com.fastcampus.jcjboard.servlet.BoardDO;
 import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -130,5 +129,30 @@ public class BoardDao {
         return count;
     }
 
+    public BoardDO getBoardCommentList(String sql){
+
+        BoardDO boardDO = new BoardDO();
+
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+
+        try {
+            conn =DbUtil.connect(dbUrl,dbId,dbPassword);
+            ps = conn.prepareStatement(sql);
+            rs = ps.executeQuery();
+
+            while (rs.next()){
+                boardDO.setNickname(rs.getString(1));
+                boardDO.setId(rs.getInt(2));
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            DbUtil.close(conn,ps,rs);
+        }
+        return boardDO;
+    }
 
 }

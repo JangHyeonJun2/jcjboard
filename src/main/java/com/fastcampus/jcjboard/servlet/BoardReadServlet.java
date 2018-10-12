@@ -23,8 +23,14 @@ public class BoardReadServlet extends HttpServlet {
 
         req.setAttribute("showDetaile",list);
 
-        RequestDispatcher dispatcher =
-                req.getRequestDispatcher("/WEB-INF/views/detail.jsp");
-        dispatcher.forward(req,resp);
+
+//        BoardDaoComment boardDaoComment = new BoardDaoComment();
+//        List<BoardCommentDO> list2 = boardDaoComment.getBoardCommentList();
+//        boardDaoComment.getBoardCommentList();
+//        req.setAttribute("CommentList",list2);
+//
+//        RequestDispatcher dispatcher =
+//                req.getRequestDispatcher("/WEB-INF/views/detail.jsp");
+//        dispatcher.forward(req,resp);
     }
 }
