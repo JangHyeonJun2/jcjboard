@@ -15,7 +15,7 @@ public class BoardWriteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //쓰기 화면을 보여주는 boardwrite.jsp로 포워딩
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/boardwrite.jsp");//실제 WAS환경에서는 root다음에 바로 /WEB-INF가 존재한다.
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/write.jsp");//실제 WAS환경에서는 root다음에 바로 /WEB-INF가 존재한다.
         dispatcher.forward(req, resp);
     }
 
