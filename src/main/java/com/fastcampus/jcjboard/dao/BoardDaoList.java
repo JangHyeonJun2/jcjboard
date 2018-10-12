@@ -5,12 +5,12 @@ import com.fastcampus.jcjboard.servlet.BoardDO;
 import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.List;
 
@@ -62,12 +62,27 @@ public class BoardDaoList {
                 board.setTitle(rs.getString(3));
                 board.setContent(rs.getString(4));
 
-                Date dbDate = rs.getDate(5);
-                java.util.Date date = new Date(dbDate.getTime());
-                LocalDateTime ldt = date.toInstant()
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDateTime();
-                board.setDate(ldt);
+//                java.sql.Timestamp time = rs.getTimestamp(5);
+                SimpleDateFormat ft =
+                        new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+                Timestamp date2 = rs.getTimestamp(5);
+
+//                Date dbDate = rs.getDate(5);
+//                SimpleDateFormat ft =
+//                        new SimpleDateFormat("yyyy.MM.dd 'at' hh:mm:ss a zzz");
+//
+//                java.util.Date date = new Date(dbDate.getTime());
+//                LocalDateTime ldt = date.toInstant()
+//                        .atZone(ZoneId.systemDefault())
+//                        .toLocalDateTime();
+
+                board.setDate(ft.format(date2));
+
+//                SimpleDateFormat ft =
+//                        new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");
+//                System.out.println("Current Date: " + ft.format(time));
+
+
                 list.add(board);
             }
 

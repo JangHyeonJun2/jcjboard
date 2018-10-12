@@ -41,7 +41,7 @@ public class BoardDaoWrite {
         int count =0;
 
         Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-        String sql = "insert into board(nickname,title,content,regdate,password) values (?,?,?,?,?)";
+        String sql = "insert into board(nickname,title,content,regdate,password) values (?,?,?,now(),?)";
         PreparedStatement ps = null;
 
         try {
@@ -50,11 +50,7 @@ public class BoardDaoWrite {
             ps.setString(2,boardDO.getTitle());
             ps.setString(3,boardDO.getContent());
 
-            LocalDate ld = LocalDate.now();
-            Date date = Date.valueOf(ld);
-            ps.setDate(4,date);
-
-            ps.setString(5,boardDO.getPassword());
+            ps.setString(4,boardDO.getPassword());
 
             count = ps.executeUpdate(); //쿼리 실행
         } catch (SQLException e) {
