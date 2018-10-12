@@ -1,12 +1,14 @@
 package com.fastcampus.jcjboard.servlet;
 
+import java.sql.Time;
+import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
 public class BoardDO {
     private int id;
     private  String title;
     private  String content;
-    private LocalDateTime date;
+    private String date;
     private String password;
     private String nickname;
     public BoardDO(){
@@ -38,7 +40,7 @@ public class BoardDO {
         return content;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -62,7 +64,7 @@ public class BoardDO {
         this.content = content;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
