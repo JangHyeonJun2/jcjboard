@@ -66,6 +66,7 @@ public class BoardDaoList {
                 SimpleDateFormat ft =
                         new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
                 Timestamp date2 = rs.getTimestamp(5);
+                board.setDate(ft.format(date2));
 
 //                Date dbDate = rs.getDate(5);
 //                SimpleDateFormat ft =
@@ -76,7 +77,7 @@ public class BoardDaoList {
 //                        .atZone(ZoneId.systemDefault())
 //                        .toLocalDateTime();
 
-                board.setDate(ft.format(date2));
+
 
 //                SimpleDateFormat ft =
 //                        new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a zzz");

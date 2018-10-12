@@ -4,10 +4,7 @@ import com.fastcampus.jcjboard.servlet.CommentVO;
 import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -51,12 +48,10 @@ public class CommentDaoUpdate {
                 comment.setNickname(rs.getString(2));
                 comment.setContent(rs.getString(3));
 
-                Date dbDate = rs.getDate(4);
-                java.util.Date date = new Date(dbDate.getTime());
-                LocalDateTime ldt = date.toInstant()
-                        .atZone(ZoneId.systemDefault())
-                        .toLocalDateTime();
-                comment.setDate(ldt);
+                SimpleDateFormat ft =
+                        new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+                Timestamp date2 = rs.getTimestamp(5);
+                comment.setDate(ft.format(date2));
                 comment.setBoardid(rs.getInt(5));
             }
 
