@@ -24,7 +24,7 @@ public class BoardReadServlet extends HttpServlet {
         req.setAttribute("showDetaile",list);
 
         CommentDaoWrite commentDaoWrite = new CommentDaoWrite();
-        List<CommentVO> list2 = commentDaoWrite.showcommentList();
+        List<CommentVO> list2 = commentDaoWrite.showcommentList(id);
         req.setAttribute("showComment",list2);
 
 
