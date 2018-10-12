@@ -19,9 +19,9 @@ public class CommentUpdateServlet extends HttpServlet {
 
         // commentList 가 만들어지면 그 때 적용해보자.
         // 일단은 1로 대체.
-        //int commentid = Integer.parseInt(req.getParameter("id"));
-        //CommentVO comment = commentDaoUpdate.getCommentOne(commentid);
-        CommentVO comment = commentDaoUpdate.getCommentOne(1);
+        int commentid = Integer.parseInt(req.getParameter("commentid"));
+        CommentVO comment = commentDaoUpdate.getCommentOne(commentid);
+        //CommentVO comment = commentDaoUpdate.getCommentOne(1);
 
         req.setAttribute("comment",comment);
         RequestDispatcher dispatcher =

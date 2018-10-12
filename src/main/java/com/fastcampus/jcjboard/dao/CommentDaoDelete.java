@@ -61,6 +61,7 @@ public class CommentDaoDelete {
             rs = ps.executeQuery();
             if (rs.next()) {
                 DBpassword = rs.getString(1);
+
             }
         } catch (SQLException e) {
             e.printStackTrace();
