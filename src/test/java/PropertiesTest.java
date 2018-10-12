@@ -31,7 +31,7 @@ public class PropertiesTest {
         DbPassword = properties.getProperty("dbPassword");
         DbDriver = properties.getProperty("dbDriver");
 
-        System.out.println(DbUri+","+DbUser+","+DbPassword+","+DbDriver);
+        //System.out.println(DbUri+","+DbUser+","+DbPassword+","+DbDriver);
     }
 
     @Test
@@ -46,6 +46,6 @@ public class PropertiesTest {
         dbUrl = getPropertyValue.getDbUri();
         dbId = getPropertyValue.getDbUser();
         dbPassword = getPropertyValue.getDbPassword();
-        System.out.println(dbUrl + "," + dbId + "," + dbPassword);
+        //System.out.println(dbUrl + "," + dbId + "," + dbPassword);
     }
 }
