@@ -25,9 +25,9 @@
             <thead>
             <tr>
                 <th class="one wide center aligned">번호</th>
-                <th class="nine wide center aligned">제목</th>
+                <th class="ten wide center aligned">제목</th>
                 <th class="three wide center aligned">글쓴이</th>
-                <th class="three wide center aligned">날짜</th>
+                <th class="two wide center aligned">날짜</th>
             </tr>
             </thead>
             <tbody>

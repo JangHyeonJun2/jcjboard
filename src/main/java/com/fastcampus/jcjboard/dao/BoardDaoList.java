@@ -63,9 +63,19 @@ public class BoardDaoList {
                 board.setContent(rs.getString(4));
 
 //                java.sql.Timestamp time = rs.getTimestamp(5);
+
                 SimpleDateFormat ft =
-                        new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+                        new SimpleDateFormat("yyyy.MM.dd");
                 Timestamp date2 = rs.getTimestamp(5);
+
+                // 오늘 날짜면은 시간만 표시, 오늘 이전이면 날짜만 표
+                Date today = new Date();
+                if (ft.format(today).equals(ft.format(date2))) {
+                    ft = new SimpleDateFormat("a hh:mm");
+                } else {
+                    ft = new SimpleDateFormat("yy.MM.dd");
+                }
+                //
                 board.setDate(ft.format(date2));
 
 //                Date dbDate = rs.getDate(5);

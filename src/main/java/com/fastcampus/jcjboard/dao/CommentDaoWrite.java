@@ -71,8 +71,17 @@ public class CommentDaoWrite {
                 commentVO.setNickname(rs.getString(2));
                 commentVO.setContent(rs.getString(3));
                 SimpleDateFormat ft =
-                        new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+                        new SimpleDateFormat("yyyy.MM.dd");
                 Timestamp date2 = rs.getTimestamp(4);
+                // 오늘 날짜면은 시간만 표시, 오늘 이전이면 날짜만 표
+                java.util.Date today = new java.util.Date();
+                if (ft.format(today).equals(ft.format(date2))) {
+                    ft = new SimpleDateFormat("a hh:mm");
+                } else {
+                    ft = new SimpleDateFormat("yy.MM.dd");
+                }
+                //
+
                 commentVO.setDate(ft.format(date2));
                 commentVO.setPassword(rs.getString(5));
                 commentVO.setBoardid(rs.getInt(6));
