@@ -68,7 +68,9 @@
 <div style="padding-top: 20px" class="ui container">
     <div class="ui divider" style="border-top: 1px solid rgba(255,255,255,.1);"></div>
     <div class="ui comments container">
+        <c:if test="${requestScope.get('showComment').size()>0}">
         <h3 class="ui dividing header">댓글</h3>
+        </c:if>
     <c:forEach items="${requestScope.showComment}" var="show">
         <div class="comment">
             <%--<a class="avatar">--%>
