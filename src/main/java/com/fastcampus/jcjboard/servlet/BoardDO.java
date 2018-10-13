@@ -12,6 +12,7 @@ public class BoardDO {
     private String password;
     private String nickname;
     private int commentCount = 0;
+    private int viewCount;
 
     public BoardDO(){
 
@@ -84,5 +85,13 @@ public class BoardDO {
 
     public void setCommentCount(int commentCount) {
         this.commentCount = commentCount;
+    }
+
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
     }
 }
