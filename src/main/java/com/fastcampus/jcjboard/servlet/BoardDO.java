@@ -11,6 +11,8 @@ public class BoardDO {
     private String date;
     private String password;
     private String nickname;
+    private int commentCount = 0;
+
     public BoardDO(){
 
     }
@@ -74,5 +76,13 @@ public class BoardDO {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
     }
 }

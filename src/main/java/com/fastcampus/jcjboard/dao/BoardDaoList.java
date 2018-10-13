@@ -124,5 +124,29 @@ public class BoardDaoList {
         return result;
     }
 
+    //added by siyoon
+    public int getCommentCount(int id) {
+        int comment =0;
+        Connection conn = null;
+        PreparedStatement ps =null;
+        ResultSet rs = null;
+        String sql ="SELECT Count(*) FROM comment WHERE boardid=?";
+
+        conn = DbUtil.connect(dbUrl, dbId, dbPassword);
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                comment=rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.close(conn,ps,rs);
+        }
+        return comment;
+    }
+
 
 }

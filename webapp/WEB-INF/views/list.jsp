@@ -34,7 +34,11 @@
             <c:forEach items="${requestScope.board}" var="bo">
                 <tr>
                     <td class="center aligned">${bo.id}</td>
-                    <td><a href="/board/read?id=${bo.id}"> ${bo.title}</a></td>
+                    <td><a href="/board/read?id=${bo.id}"> ${bo.title}
+                        <c:if test="${bo.commentCount > 0}">
+                            <span style="color: dimgray"><small>&nbsp[${bo.commentCount}]</small></span>
+                          </c:if>
+                    </a></td>
                     <td class="center aligned">${bo.nickname}</td>
                     <td class="center aligned">${bo.date}</td>
                 </tr>

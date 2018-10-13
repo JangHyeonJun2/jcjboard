@@ -27,7 +27,6 @@ public class BoardReadServlet extends HttpServlet {
         List<CommentVO> list2 = commentDaoWrite.showcommentList(id);
         req.setAttribute("showComment",list2);
 
-
         RequestDispatcher dispatcher =
                 req.getRequestDispatcher("/WEB-INF/views/read.jsp");
         dispatcher.forward(req,resp);
