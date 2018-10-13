@@ -29,17 +29,17 @@ public class CommentDaoWrite {
         int count=0;
         Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
         PreparedStatement ps = null;
-        String sql ="INSERT INTO comment(nickname,content,regdate,password,boardid) values (?,?,?,?,?);";
+        String sql ="INSERT INTO comment(nickname,content,regdate,password,boardid) values (?,?,now(),?,?);";
 
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1,commentVO.getNickname());
             ps.setString(2,commentVO.getContent());
-            LocalDate ld = LocalDate.now();
-            Date date = Date.valueOf(ld);
-            ps.setDate(3,date);
-            ps.setString(4,commentVO.getPassword());
-            ps.setInt(5,commentVO.getBoardid());
+//            LocalDate ld = LocalDate.now();
+//            Date date = Date.valueOf(ld);
+//            ps.setDate(3,date);
+            ps.setString(3,commentVO.getPassword());
+            ps.setInt(4,commentVO.getBoardid());
 
 
             count = ps.executeUpdate();
