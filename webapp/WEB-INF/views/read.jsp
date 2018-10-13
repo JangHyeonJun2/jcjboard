@@ -28,6 +28,10 @@
                     <%--</a>--%>
                 <div class="content">
                     <a class="author">글쓴이 : ${BoardDO.nickname}</a>
+                    <div class="metadata">
+                        <%--<div class="date">${BoardDO.date}</div>--%>
+                        <%--<div class="date">${BoardDO.viewCount}</div>--%>
+                    </div>
                 </div>
             </div>
         </div>
@@ -79,7 +83,7 @@
             <div class="content">
                 <a class="author">${show.nickname}</a>
                 <div class="metadata">
-                    <div class="date">1 day ago</div>
+                    <div class="date">${show.date}</div>
                 </div>
                 <div class="text">
                     <p>${show.content}</p>

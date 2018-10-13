@@ -27,15 +27,21 @@
                 <th class="one wide center aligned">번호</th>
                 <th class="nine wide center aligned">제목</th>
                 <th class="three wide center aligned">글쓴이</th>
-                <th class="three wide center aligned">날짜</th>
+                <th class="one wide center aligned">조회</th>
+                <th class="two wide center aligned">날짜</th>
             </tr>
             </thead>
             <tbody>
             <c:forEach items="${requestScope.board}" var="bo">
                 <tr>
                     <td class="center aligned">${bo.id}</td>
-                    <td><a href="/board/read?id=${bo.id}"> ${bo.title}</a></td>
+                    <td><a href="/board/read?id=${bo.id}"> ${bo.title}
+                        <c:if test="${bo.commentCount > 0}">
+                            <span style="color: dimgray"><small>&nbsp[${bo.commentCount}]</small></span>
+                          </c:if>
+                    </a></td>
                     <td class="center aligned">${bo.nickname}</td>
+                    <td class="center aligned">${bo.viewCount}</td>
                     <td class="center aligned">${bo.date}</td>
                 </tr>
             </c:forEach>

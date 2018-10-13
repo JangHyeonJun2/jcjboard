@@ -1,5 +1,6 @@
 package com.fastcampus.jcjboard.servlet;
 
+import com.fastcampus.jcjboard.dao.CommentDaoDelete;
 import com.fastcampus.jcjboard.dao.CommentDaoUpdate;
 
 import javax.servlet.RequestDispatcher;
@@ -40,22 +41,47 @@ public class CommentUpdateServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         int commentid = Integer.parseInt(req.getParameter("commentid"));
-        String content = req.getParameter("content");
         int boardid = Integer.parseInt(req.getParameter("boardid"));
+
+        // form 에 입력한 값을 가져오기.
+        String content = req.getParameter("content");
+        String nickname = req.getParameter("nickname");
+        String date = req.getParameter("date");
 
         CommentVO comment = new CommentVO();
 
         comment.setCommentid(commentid);
         comment.setContent(content);
+        comment.setNickname(nickname);
+        comment.setDate(date);
+        comment.setBoardid(boardid);
 
         CommentDaoUpdate commentDaoUpdate = new CommentDaoUpdate();
-        commentDaoUpdate.updateComment(comment);
+        //commentDaoUpdate.updateComment(comment);
+
+        // 해당 댓글의 비번을 디비에서 가져오는 부분.
+        CommentDaoDelete commentDaoDelete = new CommentDaoDelete();
+        String dbPassword = commentDaoDelete.getCommentPassword(commentid);
+
+        // 화면에 입력한 비밀번호 값을 가져오기.
+        String password = req.getParameter("password");
+
+        if(password.equals(dbPassword)) {
+            commentDaoUpdate.updateComment(comment);
+
+        } else {
+            // ------ 비번 틀렸을시 취해야할 행동.
+            //패스워드가 틀린경우 다시 포워딩한다.
+            req.setAttribute("unvalidPassword",true);
+            req.setAttribute("boardid",boardid);
+
+            req.setAttribute("comment",comment);
+
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/commentUpdate.jsp");
+            dispatcher.forward(req,resp);
+        }
 
         resp.sendRedirect("/board/read?id="+boardid);
-
-
-
-
 
     }
 

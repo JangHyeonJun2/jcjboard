@@ -39,12 +39,12 @@
                 <textarea placeholder="내용을 입력해주세요." name="content" required></textarea>
             </div>
             <div>
-                <button type="button" onclick="window.location.href='/board/list'" class="right floated ui button">
-                    취소
-                </button>
                 <button type="submit" class="right floated ui primary button">
                     <i class="icon edit"></i>
                     등록
+                </button>
+                <button type="button" onclick="window.location.href='/board/list'" class="right floated ui button">
+                    취소
                 </button>
             </div>
 

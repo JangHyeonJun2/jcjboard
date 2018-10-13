@@ -22,7 +22,7 @@ public class BoardDaoRead {
 
     public BoardDaoRead() {
         GetPropertyValue getPropertyValue = new GetPropertyValue();
-        //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+
         try {
             getPropertyValue.getPropValues();
         } catch (IOException e) {
@@ -56,7 +56,6 @@ public class BoardDaoRead {
                 board.setTitle(rs.getString(3));
                 board.setContent(rs.getString(4));
                 list.add(board);
-                //System.out.println(board.getId() + board.getContent());
             }
 
 
@@ -76,22 +75,32 @@ public class BoardDaoRead {
         PreparedStatement ps = null;
         ResultSet rs = null;
 
+
         try {
+
 
             conn = DbUtil.connect(dbUrl, dbId, dbPassword);
             //String sql ="select boardid,nickname,title,content from board";
+
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
-
+            BoardDO board = null;
             while (rs.next()) {
-                BoardDO board = new BoardDO();
+                board = new BoardDO();
                 board.setId(rs.getInt(1));
                 board.setNickname(rs.getString(2));
                 board.setTitle(rs.getString(3));
                 board.setContent(rs.getString(4));
                 list.add(board);
-                //System.out.println(board.getId() + board.getContent());
             }
+
+
+            //조회수증가시키기 add by siyoon
+            String viewCountSql = "update board set view=view+1 where boardid=?";
+            ps = conn.prepareStatement(viewCountSql);
+            ps.setInt(1,board.getId());
+            ps.executeUpdate();
+            //add by siyoon
 
 
         } catch (Exception ex) {

@@ -24,7 +24,6 @@ public class BoardDaoList {
 
     public BoardDaoList() {
         GetPropertyValue getPropertyValue = new GetPropertyValue();
-        // DBConfiguration dbConfiguration = DBConfiguration.getInstance();
         try {
             getPropertyValue.getPropValues();
         } catch (IOException e) {
@@ -33,7 +32,6 @@ public class BoardDaoList {
         this.dbUrl = getPropertyValue.getDbUri();
         this.dbId = getPropertyValue.getDbUser();
         this.dbPassword = getPropertyValue.getDbPassword();
-        System.out.println(dbUrl + "," + dbId + "," + dbPassword);
     }
 
     public List<BoardDO> getBoardListPerPage(Paging paging2) {
@@ -47,7 +45,7 @@ public class BoardDaoList {
         try {
 
             conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql ="select boardid,nickname,title,content,regdate from board order by boardid desc limit ? , ?";
+            String sql ="select boardid,nickname,title,content,regdate,view from board order by boardid desc limit ? , ?";
             ps = conn.prepareStatement(sql);
 
             // 0~ 10까지만 가져오기.
@@ -63,10 +61,23 @@ public class BoardDaoList {
                 board.setContent(rs.getString(4));
 
 //                java.sql.Timestamp time = rs.getTimestamp(5);
+
                 SimpleDateFormat ft =
-                        new SimpleDateFormat("yyyy.MM.dd hh:mm:ss");
+                        new SimpleDateFormat("yyyy.MM.dd");
                 Timestamp date2 = rs.getTimestamp(5);
+
+                // 오늘 날짜면은 시간만 표시, 오늘 이전이면 날짜만 표
+                Date today = new Date();
+                if (ft.format(today).equals(ft.format(date2))) {
+                    ft = new SimpleDateFormat("a hh:mm");
+                } else {
+                    ft = new SimpleDateFormat("yy.MM.dd");
+                }
+                //
                 board.setDate(ft.format(date2));
+
+                //조회수 받아오기 add by siyoon
+                board.setViewCount(rs.getInt(6));
 
 //                Date dbDate = rs.getDate(5);
 //                SimpleDateFormat ft =
@@ -122,6 +133,30 @@ public class BoardDaoList {
         }
 
         return result;
+    }
+
+    //added by siyoon
+    public int getCommentCount(int id) {
+        int comment =0;
+        Connection conn = null;
+        PreparedStatement ps =null;
+        ResultSet rs = null;
+        String sql ="SELECT Count(*) FROM comment WHERE boardid=?";
+
+        conn = DbUtil.connect(dbUrl, dbId, dbPassword);
+        try {
+            ps = conn.prepareStatement(sql);
+            ps.setInt(1,id);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                comment=rs.getInt(1);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtil.close(conn,ps,rs);
+        }
+        return comment;
     }
 
 

@@ -41,21 +41,27 @@ public class CommentDeleteServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
 
         String password = req.getParameter("password");
-        System.out.println("req.getParameter : " + password);
+
         int commentid = Integer.parseInt(req.getParameter("commentid"));
         int boardid = Integer.parseInt(req.getParameter("boardid"));
 
         CommentDaoDelete commentDaoDelete = new CommentDaoDelete();
         String dbPassword = commentDaoDelete.getCommentPassword(commentid);
 
-        System.out.println("dbPassword : " + dbPassword);
 
 
         if(password.equals(dbPassword)) {
             commentDaoDelete.deleteComment(commentid);
+
         } else {
             // ------ 비번 틀렸을시 취해야할 행동.
-            System.out.println();
+            //패스워드가 틀린경우 다시 포워딩한다.
+            req.setAttribute("unvalidPassword",true);
+            req.setAttribute("commentid",commentid);
+            req.setAttribute("boardid",boardid);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/commentDelete.jsp");
+            dispatcher.forward(req,resp);
+            System.out.println("비번 틀렸어영~");
         }
 
         resp.sendRedirect("/board/read?id="+boardid);

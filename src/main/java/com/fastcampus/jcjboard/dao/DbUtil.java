@@ -11,7 +11,6 @@ public class DbUtil {
 
         Connection conn = null;
 
-        //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
         GetPropertyValue getPropertyValue = new GetPropertyValue();
         try {
             getPropertyValue.getPropValues();
@@ -22,11 +21,11 @@ public class DbUtil {
 
             Class.forName(getPropertyValue.getDbDriver());
 
-           // Class.forName(getPropertyValue.getDbDriver());
-
-
             conn = DriverManager.getConnection(dbUrl,dbId,dbPassword);
+<<<<<<< HEAD
 
+=======
+>>>>>>> 73ed62cdacd0062c8c381480fb55bc93aef34132
 
         }catch (Exception ex) {
             throw new RuntimeException();

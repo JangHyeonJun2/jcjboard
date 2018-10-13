@@ -11,16 +11,13 @@ public class BoardDO {
     private String date;
     private String password;
     private String nickname;
+    private int commentCount = 0;
+    private int viewCount;
+
     public BoardDO(){
 
     }
-    /*
-    public BoardDO(int id,String title,String content){
-        this.id = id;
-        this.title = title;
-        this.content = content;
-    }
-    */
+
     public BoardDO(String title, String content, String password, String nickname) {
         this.title = title;
         this.content = content;
@@ -74,5 +71,21 @@ public class BoardDO {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
     }
 }

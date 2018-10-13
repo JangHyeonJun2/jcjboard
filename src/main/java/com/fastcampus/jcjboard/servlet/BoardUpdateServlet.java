@@ -26,6 +26,7 @@ public class BoardUpdateServlet extends HttpServlet {
         RequestDispatcher dispatcher =
                 req.getRequestDispatcher("/WEB-INF/views/update.jsp");
         dispatcher.forward(req,resp);
+
 }
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -58,18 +59,6 @@ public class BoardUpdateServlet extends HttpServlet {
                 dispatcher.forward(req,resp);
                 req.setAttribute("unvalidpassword",id);
             }
-
-
-        /*
-        RequestDispatcher dispatcher =
-                req.getRequestDispatcher("/WEB-INF/views/list.jsp");
-        dispatcher.forward(req,resp);
-        */
-        //비밀번호 맞을 값을 저장
-//            HttpSession session = req.getSession();
-//            session.setAttribute("validpassword","true");
-
-
     }
 
 }
