@@ -53,6 +53,12 @@ public class BoardListServlet extends HttpServlet {
         // 게시판 총 글 수.
         //int totalCount = list.size();
 
+        /*add by siyoon - 해당글의 댓글 숫자를 출력하기 위해서 추가함*/
+        for (BoardDO bdo : list) {
+            int commentCount = dao.getCommentCount(bdo.getId());
+            bdo.setCommentCount(commentCount);
+        }
+
         req.setAttribute("board" , list);
         req.setAttribute("boardSize" , totalCount);
         req.setAttribute("paging" , paging);
