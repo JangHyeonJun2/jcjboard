@@ -26,10 +26,6 @@ public class BoardUpdateServlet extends HttpServlet {
                 req.getRequestDispatcher("/WEB-INF/views/update.jsp");
         dispatcher.forward(req,resp);
 
-
-
-
-
 }
 
     @Override
@@ -49,12 +45,6 @@ public class BoardUpdateServlet extends HttpServlet {
         boardDO.setContent(content);
         BoardDaoRead boardDao = new BoardDaoRead();
         boardDao.updateBoardDO(boardDO);
-
-        /*
-        RequestDispatcher dispatcher =
-                req.getRequestDispatcher("/WEB-INF/views/list.jsp");
-        dispatcher.forward(req,resp);
-        */
 
         resp.sendRedirect("/board/list");
     }

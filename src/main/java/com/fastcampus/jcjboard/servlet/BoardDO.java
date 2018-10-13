@@ -17,13 +17,7 @@ public class BoardDO {
     public BoardDO(){
 
     }
-    /*
-    public BoardDO(int id,String title,String content){
-        this.id = id;
-        this.title = title;
-        this.content = content;
-    }
-    */
+
     public BoardDO(String title, String content, String password, String nickname) {
         this.title = title;
         this.content = content;

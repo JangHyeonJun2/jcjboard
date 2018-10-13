@@ -79,8 +79,6 @@ public class CommentUpdateServlet extends HttpServlet {
 
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/commentUpdate.jsp");
             dispatcher.forward(req,resp);
-
-            System.out.println("비번 틀렸어영~");
         }
 
         resp.sendRedirect("/board/read?id="+boardid);
