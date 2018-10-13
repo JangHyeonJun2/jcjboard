@@ -18,7 +18,7 @@
 
         내용 : <textarea name="content"></textarea>
 
-        현재 글의 ID를 "boardid"로 넘겨주어야함
+
         <button type="submit">댓글쓰기</button>
     </form>
 </body>

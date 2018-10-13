@@ -19,7 +19,7 @@ public class BoardListServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //int id = Integer.parseInt(req.getParameter("page"));
 
-        System.out.println(req.getParameter("page"));
+
         // 그냥 id 값 초기화 해준거.
         int id=1;
 

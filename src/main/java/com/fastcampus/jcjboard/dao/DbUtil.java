@@ -26,7 +26,7 @@ public class DbUtil {
 
 
             conn = DriverManager.getConnection(dbUrl,dbId,dbPassword);
-            System.out.println(dbUrl+","+dbId+","+dbPassword);
+
 
         }catch (Exception ex) {
             throw new RuntimeException();

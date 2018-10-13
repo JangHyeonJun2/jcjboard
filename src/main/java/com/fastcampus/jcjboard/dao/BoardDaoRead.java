@@ -3,7 +3,6 @@ package com.fastcampus.jcjboard.dao;
 import com.fastcampus.jcjboard.servlet.BoardDO;
 import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
-import javax.imageio.IIOException;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -11,7 +10,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.lang.String;
 public class BoardDaoRead {
 
 
@@ -125,6 +124,27 @@ public class BoardDaoRead {
         }
         return count;
     }
-
+    public boolean getpassword(BoardDO boardDO){
+        Connection conn = null;
+        PreparedStatement ps = null;
+        String sqlpassword="";
+        boolean value = false;
+        try{
+            conn = DbUtil.connect(dbUrl,dbId,dbPassword);
+            String sql3 = "select password from board where boardid="+boardDO.getId();
+            ps = conn.prepareStatement(sql3);
+            ResultSet rs = ps.executeQuery(sql3);
+            if(rs.next()){
+                sqlpassword = rs.getString(1);
+            }
+            if(sqlpassword.equals(boardDO.getPassword()))
+                value= true;
+            else
+                value= false;
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+        return value;
+    }
 
 }

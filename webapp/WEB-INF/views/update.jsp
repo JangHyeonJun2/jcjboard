@@ -43,7 +43,7 @@
             </div>
 
             <div>
-                <button type="submit" class="right floated ui primary button">
+                <button type="submit"  class="right floated ui primary button">
                     <i class="icon edit"></i>
                     등록
                 </button>
