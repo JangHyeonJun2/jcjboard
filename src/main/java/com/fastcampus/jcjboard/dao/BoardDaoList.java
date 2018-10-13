@@ -47,7 +47,7 @@ public class BoardDaoList {
         try {
 
             conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql ="select boardid,nickname,title,content,regdate from board order by boardid desc limit ? , ?";
+            String sql ="select boardid,nickname,title,content,regdate,view from board order by boardid desc limit ? , ?";
             ps = conn.prepareStatement(sql);
 
             // 0~ 10까지만 가져오기.
@@ -77,6 +77,9 @@ public class BoardDaoList {
                 }
                 //
                 board.setDate(ft.format(date2));
+
+                //조회수 받아오기 add by siyoon
+                board.setViewCount(rs.getInt(6));
 
 //                Date dbDate = rs.getDate(5);
 //                SimpleDateFormat ft =
