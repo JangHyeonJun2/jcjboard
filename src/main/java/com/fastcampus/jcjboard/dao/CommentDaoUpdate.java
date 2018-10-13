@@ -18,7 +18,7 @@ public class CommentDaoUpdate {
 
     public CommentDaoUpdate() {
         GetPropertyValue getPropertyValue = new GetPropertyValue();
-        //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+
         try {
             getPropertyValue.getPropValues();
         } catch (IOException e) {

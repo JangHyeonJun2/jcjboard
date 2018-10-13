@@ -24,7 +24,6 @@ public class BoardDaoList {
 
     public BoardDaoList() {
         GetPropertyValue getPropertyValue = new GetPropertyValue();
-        // DBConfiguration dbConfiguration = DBConfiguration.getInstance();
         try {
             getPropertyValue.getPropValues();
         } catch (IOException e) {
@@ -33,7 +32,6 @@ public class BoardDaoList {
         this.dbUrl = getPropertyValue.getDbUri();
         this.dbId = getPropertyValue.getDbUser();
         this.dbPassword = getPropertyValue.getDbPassword();
-        System.out.println(dbUrl + "," + dbId + "," + dbPassword);
     }
 
     public List<BoardDO> getBoardListPerPage(Paging paging2) {

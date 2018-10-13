@@ -23,7 +23,7 @@ public class BoardDaoRead {
 
     public BoardDaoRead() {
         GetPropertyValue getPropertyValue = new GetPropertyValue();
-        //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
+
         try {
             getPropertyValue.getPropValues();
         } catch (IOException e) {
@@ -57,7 +57,6 @@ public class BoardDaoRead {
                 board.setTitle(rs.getString(3));
                 board.setContent(rs.getString(4));
                 list.add(board);
-                //System.out.println(board.getId() + board.getContent());
             }
 
 
@@ -94,7 +93,6 @@ public class BoardDaoRead {
                 board.setTitle(rs.getString(3));
                 board.setContent(rs.getString(4));
                 list.add(board);
-                //System.out.println(board.getId() + board.getContent());
             }
 
 

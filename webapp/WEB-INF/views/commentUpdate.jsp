@@ -17,11 +17,13 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
 
 
-    <title>Title</title>
+    <title>게시판 - 댓글 수정</title>
 </head>
-<body>
+<body style="padding-top:40px">
+<div class="ui container column grid">
+    <div class="ui nine column centered floated">
 
-    <form method="post" accept-charset="UTF-8" action="/board/comment/update">
+    <form class="ui reply form" method="post" accept-charset="UTF-8" action="/board/comment/update">
 
 
         <c:if test="${requestScope.get('unvalidPassword')}">
@@ -34,31 +36,35 @@
             </div>
         </c:if>
 
-        <input type="hidden" name="commentid" value="${comment.commentid}"> <br>
-        NICKNAME : <input type="text" name="nickname" value="${comment.nickname}"> <br>
-        <!-- 수정 불가능한 영역으로 만들기 -->
-        DATE : <input type="text" name="date" id="date" value="${comment.date}"> <br>
-        CONTENT : <textarea type="text" name="content"> ${comment.content} </textarea> <br>
-        PASSWORD : <input type="text" name="password" value=""> <br>
+        <input type="hidden" name="commentid" value="${comment.commentid}"/>
+        <input type="hidden" name="boardid" value="${comment.boardid}"/>
+        <h4 class="ui header">댓글 수정하기</h4>
+        <div class="fields">
+            <div class="field">
+                <input type="text" placeholder="닉네임" value="${comment.nickname}" name="nickname" required>
+            </div>
+            <div class="field">
+                <input type="password" placeholder="비밀번호" name="password" required>
+            </div>
+        </div>
 
+        <div class="field">
+            <textarea name="content" placeholder="내용을 입력하세요." required>${comment.content}</textarea>
+        </div>
 
-        수정완료: <button type="submit">확인</button><br>
-        <input type="hidden" name="boardid" value="${comment.boardid}">
-        <button type="button" onclick="window.location.href='/board/read?id='+${comment.boardid}">
-            목록
-        </button>
-
+        <div>
+            <button type="submit" class="right floated ui primary button">
+                <i class="icon edit"></i>
+                수정 완료
+            </button>
+            <button type="button" onclick="window.location.href='/board/read?id='+${comment.boardid}" class="right floated ui button">
+                취소
+            </button>
+        </div>
     </form>
 
-    <a href ="/board/comment/delete?commentid=${comment.commentid}&boardid=${comment.boardid}">
-    <button type="button">삭제</button></a>
-
-    <%--<form method="post" accept-charset="UTF-8" action="/board/comment/delete">--%>
-        <%--<input type="hidden" name="commentid" value="${comment.commentid}"> <br>--%>
-        <%--<input type="hidden" name="boardid" value="${comment.boardid}"> <br>--%>
-        <%--<button type="submit">삭제!</button>--%>
-    <%--</form>--%>
-
+    </div>
+    </div>
 </body>
 
 
