@@ -1,6 +1,9 @@
 package com.fastcampus.jcjboard.servlet;
 
 import com.fastcampus.jcjboard.dao.BoardDaoRead;
+import com.fastcampus.jcjboard.dao.BoardDaoUpdate;
+import com.fastcampus.jcjboard.dao.CommentDaoRead;
+import com.fastcampus.jcjboard.dao.CommentDaoWrite;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -30,7 +33,7 @@ public class BoardUpdateServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
-        BoardDaoRead boardDaoRead = new BoardDaoRead();
+        BoardDaoUpdate boardDaoUpdate = new BoardDaoUpdate();
         int id = Integer.parseInt(req.getParameter("id"));
         String name = req.getParameter("nickname");
         String title = req.getParameter("title");
@@ -44,11 +47,16 @@ public class BoardUpdateServlet extends HttpServlet {
             boardDO.setTitle(title);
             boardDO.setContent(content);
 
-            String DBpassword= boardDaoRead.getDBpassword(boardDO);
+            String DBpassword= boardDaoUpdate.getDBpassword(boardDO);
 
             if(password.equals(DBpassword)){
-                boardDaoRead.updateBoardDO(boardDO);
+                boardDaoUpdate.updateBoardDO(boardDO);
                 req.setAttribute("showBoardDO",boardDO);
+
+                CommentDaoRead commentDaoRead = new CommentDaoRead();
+                List<CommentVO> commentList = commentDaoRead.getCommentList(id);
+                req.setAttribute("showComment",commentList);
+
                 RequestDispatcher dispatcher =
                         req.getRequestDispatcher("/WEB-INF/views/read.jsp");
                 dispatcher.forward(req,resp);
