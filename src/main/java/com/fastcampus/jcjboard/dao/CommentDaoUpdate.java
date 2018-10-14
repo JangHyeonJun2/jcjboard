@@ -76,11 +76,12 @@ public class CommentDaoUpdate {
         PreparedStatement ps = null;
         try {
             conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-            String sql = "update comment set content=? , regdate=now() where commentid=? ";
+            String sql = "update comment set nickname=?, content=? , regdate=now() where commentid=? ";
             ps = conn.prepareStatement(sql);
 
-            ps.setString(1, commentVO.getContent());
-            ps.setInt(2, commentVO.getCommentid());
+            ps.setString(1, commentVO.getNickname());
+            ps.setString(2, commentVO.getContent());
+            ps.setInt(3, commentVO.getCommentid());
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
