@@ -29,8 +29,8 @@
                 <div class="content">
                     <a class="author">글쓴이 : ${requestScope.showBoardDO.nickname}</a>
                     <div class="metadata">
-                        <%--<div class="date">${BoardDO.date}</div>--%>
-                        <%--<div class="date">${BoardDO.viewCount}</div>--%>
+                        <div class="date">날짜 : ${requestScope.showBoardDO.date}</div>
+                        <div class="date">조회수 ${requestScope.showBoardDO.viewCount}</div>
                     </div>
                 </div>
             </div>
@@ -94,8 +94,11 @@
                 </div>
             </div>
         </div>
-    </c:forEach>
         <div class="ui divider"></div>
+    </c:forEach>
+<c:if test="${requestScope.get('showComment').size()<=0}">
+        <div class="ui divider"></div>
+</c:if>
         <div style="margin-top:40px" class="ui container">
             <h4 class="ui header">댓글쓰기</h4>
 

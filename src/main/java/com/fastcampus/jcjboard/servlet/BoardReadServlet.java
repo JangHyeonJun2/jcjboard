@@ -1,6 +1,7 @@
 package com.fastcampus.jcjboard.servlet;
 
 import com.fastcampus.jcjboard.dao.BoardDaoRead;
+import com.fastcampus.jcjboard.dao.CommentDaoRead;
 import com.fastcampus.jcjboard.dao.CommentDaoWrite;
 
 import javax.servlet.RequestDispatcher;
@@ -23,8 +24,8 @@ public class BoardReadServlet extends HttpServlet {
 
         req.setAttribute("showBoardDO",boardDO);
 
-        CommentDaoWrite commentDaoWrite = new CommentDaoWrite();
-        List<CommentVO> commentList = commentDaoWrite.showcommentList(id);
+        CommentDaoRead commentDaoRead = new CommentDaoRead();
+        List<CommentVO> commentList = commentDaoRead.getCommentList(id);
         req.setAttribute("showComment",commentList);
 
         RequestDispatcher dispatcher =

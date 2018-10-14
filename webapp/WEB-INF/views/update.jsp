@@ -56,7 +56,7 @@
                     <i class="icon edit"></i>
                     등록
                 </button>
-                <button type="button" onclick="window.location.href='/board/list'" class="right floated ui button">
+                <button type="button" onclick="window.location.href='/board/read?id=${requestScope.showBoardDO.id}'" class="right floated ui button">
                     취소
                 </button>
             </div>
