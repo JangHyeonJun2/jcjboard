@@ -89,3 +89,6 @@ buildNumber.properties
 
 *.iml
 .idea
+
+# Avoid conflict DbConf(DBMS configuration)
+src/main/resources/DbConf

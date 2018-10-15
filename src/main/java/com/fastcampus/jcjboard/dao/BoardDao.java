@@ -4,6 +4,7 @@ import com.fastcampus.jcjboard.paging.Paging;
 import com.fastcampus.jcjboard.servlet.ArticleVO;
 import com.fastcampus.jcjboard.util.DbConfProperty;
 
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -265,6 +266,7 @@ public class BoardDao {
             ps.setString(1, articleVO.getNickname()); //바인딩
             ps.setString(2, articleVO.getTitle());
             ps.setString(3, articleVO.getContent());
+
             ps.setString(4, articleVO.getPassword());
 
             count = ps.executeUpdate(); //쿼리 실행
