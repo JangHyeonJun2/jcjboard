@@ -1,7 +1,6 @@
 package com.fastcampus.jcjboard.servlet;
 
-import com.fastcampus.jcjboard.dao.CommentDaoDelete;
-import com.fastcampus.jcjboard.dao.CommentDaoUpdate;
+import com.fastcampus.jcjboard.dao.CommentDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -45,10 +44,8 @@ public class CommentDeleteServlet extends HttpServlet {
         int commentid = Integer.parseInt(req.getParameter("commentid"));
         int boardid = Integer.parseInt(req.getParameter("boardid"));
 
-        CommentDaoDelete commentDaoDelete = new CommentDaoDelete();
+        CommentDao commentDaoDelete = new CommentDao();
         String dbPassword = commentDaoDelete.getCommentPassword(commentid);
-
-
 
         if(password.equals(dbPassword)) {
             commentDaoDelete.deleteComment(commentid);
@@ -61,11 +58,8 @@ public class CommentDeleteServlet extends HttpServlet {
             req.setAttribute("boardid",boardid);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/commentDelete.jsp");
             dispatcher.forward(req,resp);
-            System.out.println("비번 틀렸어영~");
         }
 
         resp.sendRedirect("/board/read?id="+boardid);
-
-
     }
 }

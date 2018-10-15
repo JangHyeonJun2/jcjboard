@@ -1,19 +1,19 @@
-package com.fastcampus.jcjboard.servlet;
+package com.fastcampus.jcjboard.util;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class GetPropertyValue {
+public class DbConfProperty {
     InputStream inputStream;
-    String DbUri;
+    String DbUrl;
     String DbUser;
     String DbPassword;
     String DbDriver;
     public void getPropValues() throws IOException{
         Properties properties = new Properties();
-        String proFileName = "db2";
+        String proFileName = "DbConf";
 
         inputStream = getClass().getClassLoader().getResourceAsStream(proFileName);
 
@@ -22,14 +22,14 @@ public class GetPropertyValue {
         }else{
             throw new FileNotFoundException("property file" + proFileName + " not found in the classpath");
         }
-        DbUri = properties.getProperty("dbUrl");
+        DbUrl = properties.getProperty("dbUrl");
         DbUser = properties.getProperty("dbId");
         DbPassword = properties.getProperty("dbPassword");
         DbDriver = properties.getProperty("dbDriver");
 
     }
-    public String getDbUri(){
-        return DbUri;
+    public String getDbUrl(){
+        return DbUrl;
     }
     public String getDbUser(){
         return DbUser;

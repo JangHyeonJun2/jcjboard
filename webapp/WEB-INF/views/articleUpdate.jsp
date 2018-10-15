@@ -21,8 +21,8 @@
 <div class="ui container">
     <form class="ui form" method="post" accept-charset="UTF-8" action="/board/update">
 
-        <input type="hidden" name="id" value="${requestScope.showBoardDO.id}"> <br>
-        <input type="hidden" name="date" value="${requestScope.showBoardDO.date}"> <br>
+        <input type="hidden" name="id" value="${requestScope.articleVO.id}"> <br>
+        <input type="hidden" name="date" value="${requestScope.articleVO.date}"> <br>
         <div class="ui equal width form">
             <c:if test="${requestScope.get('unvalidPassword')}">
                 <div class="ui negative message">
@@ -36,7 +36,7 @@
             <div class="fields">
                 <div class="field">
                     <label>닉네임</label>
-                    <input type="text" value="${requestScope.showBoardDO.nickname}" placeholder="닉네임" name="nickname"  required>
+                    <input type="text" value="${requestScope.articleVO.nickname}" placeholder="닉네임" name="nickname"  required>
                 </div>
                 <div class="field">
                     <label>비밀번호</label>
@@ -45,11 +45,11 @@
             </div>
             <div class="field">
                 <label>제목</label>
-                <input type="text" value="${requestScope.showBoardDO.title}" placeholder="제목을 입력해주세요." name="title" required>
+                <input type="text" value="${requestScope.articleVO.title}" placeholder="제목을 입력해주세요." name="title" required>
             </div>
             <div class="field">
                 <label>내용</label>
-                <textarea placeholder="내용을 입력해주세요." id="content" name="content" required>${requestScope.showBoardDO.content}</textarea>
+                <textarea placeholder="내용을 입력해주세요." id="content" name="content" required>${requestScope.articleVO.content}</textarea>
             </div>
 
             <div>
@@ -57,7 +57,7 @@
                     <i class="icon edit"></i>
                     등록
                 </button>
-                <button type="button" onclick="window.location.href='/board/read?id=${requestScope.showBoardDO.id}'" class="right floated ui button">
+                <button type="button" onclick="window.location.href='/board/read?id=${requestScope.articleVO.id}'" class="right floated ui button">
                     취소
                 </button>
             </div>

@@ -1,7 +1,6 @@
 package com.fastcampus.jcjboard.servlet;
 
-import com.fastcampus.jcjboard.dao.CommentDaoDelete;
-import com.fastcampus.jcjboard.dao.CommentDaoUpdate;
+import com.fastcampus.jcjboard.dao.CommentDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -16,12 +15,19 @@ public class CommentUpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 데이터를 읽어와 jsp 파일에 써주는 역할.
-        CommentDaoUpdate commentDaoUpdate = new CommentDaoUpdate();
+        CommentDao commentDao = new CommentDao();
 
         // commentList 가 만들어지면 그 때 적용해보자.
         // 일단은 1로 대체.
-        int commentid = Integer.parseInt(req.getParameter("commentid"));
-        CommentVO comment = commentDaoUpdate.getCommentOne(commentid);
+        int commentid = 0;
+        try {
+            commentid = Integer.parseInt(req.getParameter("commentid"));
+        } catch (NumberFormatException e) {
+            resp.sendRedirect("/board/read");
+            /*id값 설정해야하는지 확인하기*/
+            e.printStackTrace();
+        }
+        CommentVO comment = commentDao.getComment(commentid);
         //CommentVO comment = commentDaoUpdate.getCommentOne(1);
 
         req.setAttribute("comment",comment);
@@ -56,18 +62,17 @@ public class CommentUpdateServlet extends HttpServlet {
         comment.setDate(date);
         comment.setBoardid(boardid);
 
-        CommentDaoUpdate commentDaoUpdate = new CommentDaoUpdate();
+        CommentDao commentDao = new CommentDao();
         //commentDaoUpdate.updateComment(comment);
 
         // 해당 댓글의 비번을 디비에서 가져오는 부분.
-        CommentDaoDelete commentDaoDelete = new CommentDaoDelete();
-        String dbPassword = commentDaoDelete.getCommentPassword(commentid);
+        String dbPassword = commentDao.getCommentPassword(commentid);
 
         // 화면에 입력한 비밀번호 값을 가져오기.
         String password = req.getParameter("password");
 
         if(password.equals(dbPassword)) {
-            commentDaoUpdate.updateComment(comment);
+            commentDao.updateComment(comment);
 
         } else {
             // ------ 비번 틀렸을시 취해야할 행동.

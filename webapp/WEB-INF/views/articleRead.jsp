@@ -27,10 +27,10 @@
                     <%--<img src="/images/avatar/small/elliot.jpg">--%>
                     <%--</a>--%>
                 <div class="content">
-                    <a class="author">글쓴이 : ${requestScope.showBoardDO.nickname}</a>
+                    <a class="author">글쓴이 : ${requestScope.articleVO.nickname}</a>
                     <div class="metadata">
-                        <div class="date">날짜 : ${requestScope.showBoardDO.date}</div>
-                        <div class="date">조회수 ${requestScope.showBoardDO.viewCount}</div>
+                        <div class="date">날짜 : ${requestScope.articleVO.date}</div>
+                        <div class="date">조회수 ${requestScope.articleVO.viewCount}</div>
                     </div>
                 </div>
             </div>
@@ -38,11 +38,11 @@
 
         <div class="ui message">
             <div class="header">
-                    ${requestScope.showBoardDO.title}
+                    ${requestScope.articleVO.title}
             </div>
         </div>
         <div class="ui message" style="min-height: 150px">
-            <p>${requestScope.showBoardDO.content}</p>
+            <p>${requestScope.articleVO.content}</p>
         </div>
 
         <div class="ui container">
@@ -56,10 +56,10 @@
                 <i class="icon edit"></i>
                 글쓰기
             </button>
-            <button type="button" onclick="window.location.href='/board/update?id=${requestScope.showBoardDO.id}'" class="right floated ui button">
+            <button type="button" onclick="window.location.href='/board/update?id=${requestScope.articleVO.id}'" class="right floated ui button">
                 수정
             </button>
-            <button type="button" onclick="window.location.href='/board/delete?id=${requestScope.showBoardDO.id}'" class="right floated ui button">
+            <button type="button" onclick="window.location.href='/board/delete?id=${requestScope.articleVO.id}'" class="right floated ui button">
                 삭제
             </button>
             </div>
@@ -72,38 +72,38 @@
 <div style="padding-top: 20px" class="ui container">
     <div class="ui divider" style="border-top: 1px solid rgba(255,255,255,.1);"></div>
     <div class="ui comments container">
-        <c:if test="${requestScope.get('showComment').size()>0}">
+        <c:if test="${requestScope.get('commentList').size()>0}">
         <h3 class="ui dividing header">댓글</h3>
         </c:if>
-    <c:forEach items="${requestScope.showComment}" var="show">
+    <c:forEach items="${requestScope.commentList}" var="comment">
         <div class="comment">
             <%--<a class="avatar">--%>
             <%--<img src="/images/avatar/small/joe.jpg">--%>
             <%--</a>--%>
             <div class="content">
-                <a class="author">${show.nickname}</a>
+                <a class="author">${comment.nickname}</a>
                 <div class="metadata">
-                    <div class="date">${show.date}</div>
+                    <div class="date">${comment.date}</div>
                 </div>
                 <div class="text">
-                    <p>${show.content}</p>
+                    <p>${comment.content}</p>
                 </div>
                 <div class="actions">
-                    <a class="reply" href ="/board/comment/update?commentid=${show.commentid}">수정</a>
-                    <a class="reply" href ="/board/comment/delete?commentid=${show.commentid}&boardid=${show.boardid}">삭제</a>
+                    <a class="reply" href ="/board/comment/update?commentid=${comment.commentid}">수정</a>
+                    <a class="reply" href ="/board/comment/delete?commentid=${comment.commentid}&boardid=${comment.boardid}">삭제</a>
                 </div>
             </div>
         </div>
         <div class="ui divider"></div>
     </c:forEach>
-<c:if test="${requestScope.get('showComment').size()<=0}">
+<c:if test="${requestScope.get('commentList').size()<=0}">
         <div class="ui divider"></div>
 </c:if>
         <div style="margin-top:40px" class="ui container">
             <h4 class="ui header">댓글쓰기</h4>
 
         <form class="ui reply form" method="post" action="/board/comment/write">
-            <input type="hidden" name="boardid" value="${requestScope.showBoardDO.id}">
+            <input type="hidden" name="boardid" value="${requestScope.articleVO.id}">
             <div class="fields">
                 <div class="field">
                     <input type="text" placeholder="닉네임" name="nickname" required>

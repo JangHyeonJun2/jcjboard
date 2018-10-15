@@ -1,0 +1,4 @@
+dbUrl = jdbc:mariadb://localhost:3306/Test_db
+dbId = siyoon
+dbPassword = 1234
+dbDriver = org.mariadb.jdbc.Driver
