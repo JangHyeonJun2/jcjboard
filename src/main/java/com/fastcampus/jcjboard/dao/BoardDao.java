@@ -63,7 +63,7 @@ public class BoardDao {
             }
 
             //조회수증가시키기
-            String viewCountSql = "update board set view=view+1 where boardid=?";
+            String viewCountSql = "UPDATE board SET view=view+1 WHERE boardid=?";
             ps = conn.prepareStatement(viewCountSql);
             ps.setInt(1,board.getId());
             ps.executeUpdate();
@@ -110,7 +110,7 @@ public class BoardDao {
         try {
 
             conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql ="select boardid,nickname,title,content,regdate,view from board order by boardid desc limit ? , ?";
+            String sql ="SELECT boardid,nickname,title,content,regdate,view FROM board ORDER BY boardid DESC limit ? , ?";
             ps = conn.prepareStatement(sql);
 
             // 0~ 10까지만 가져오기.
@@ -167,7 +167,7 @@ public class BoardDao {
         try {
 
             conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql ="select count(*) from board";
+            String sql ="SELECT count(*) FROM board";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
             while(rs.next()) {
@@ -213,7 +213,7 @@ public class BoardDao {
         PreparedStatement ps = null;
         try {
             conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-            String sql2 = "update board set  nickname=?,title=?,content=? where boardid=? AND password = ?";
+            String sql2 = "UPDATE board SET nickname=?,title=?,content=? WHERE boardid=? AND password = ?";
             ps = conn.prepareStatement(sql2);
 
             ps.setString(1, articleVO.getNickname());
@@ -235,9 +235,8 @@ public class BoardDao {
         int count =0;
 
         Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-        String sql = "insert into board(nickname,title,content,regdate,password) values (?,?,?,now(),?)";
+        String sql = "INSERT INTO board(nickname,title,content,regdate,password) VALUES (?,?,?,now(),?)";
         PreparedStatement ps = null;
-        System.out.println(now());
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, articleVO.getNickname()); //바인딩

@@ -1,6 +1,7 @@
 package com.fastcampus.jcjboard.servlet;
 
 import com.fastcampus.jcjboard.dao.CommentDao;
+import com.fastcampus.jcjboard.util.InputValueHandler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -15,19 +16,8 @@ public class CommentDeleteServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int commentid = 0;
-        int boardid=0;
-        commentid = Integer.parseInt(req.getParameter("commentid"));
-        // 파라미터를 하나 더 쓰지 않는 방법!
-        // commentid 를 이용. db에서 select ~~~ where=commentid;
-        boardid = Integer.parseInt(req.getParameter("boardid"));
-//        try {
-//
-//        }catch(NumberFormatException e) {
-//            // Dao 에서 boardid 가져오기.
-//            resp.sendRedirect("/board/read?id="+ boardid);
-//            return;
-//        }
+        int commentid = InputValueHandler.convertToInt("commnetid", req, resp);
+        int boardid = InputValueHandler.convertToInt("boardid", req, resp);
 
         req.setAttribute("commentid" , commentid);
         req.setAttribute("boardid" , boardid);
@@ -41,18 +31,12 @@ public class CommentDeleteServlet extends HttpServlet {
 
         String password = req.getParameter("password");
 
-        int commentid = Integer.parseInt(req.getParameter("commentid"));
-        int boardid = Integer.parseInt(req.getParameter("boardid"));
+        int commentid = InputValueHandler.convertToInt("commnetid", req, resp);
+        int boardid = InputValueHandler.convertToInt("boardid", req, resp);
 
         CommentDao commentDaoDelete = new CommentDao();
-        String dbPassword = commentDaoDelete.getCommentPassword(commentid);
-
-        if(password.equals(dbPassword)) {
-            commentDaoDelete.deleteComment(commentid);
-
-        } else {
-            // ------ 비번 틀렸을시 취해야할 행동.
-            //패스워드가 틀린경우 다시 포워딩한다.
+        //패스워드가 틀린경우 다시 포워딩한다.
+        if (commentDaoDelete.deleteComment(commentid,password)<=0) {
             req.setAttribute("unvalidPassword",true);
             req.setAttribute("commentid",commentid);
             req.setAttribute("boardid",boardid);

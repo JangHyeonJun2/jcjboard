@@ -1,6 +1,7 @@
 package com.fastcampus.jcjboard.servlet;
 
 import com.fastcampus.jcjboard.dao.BoardDao;
+import com.fastcampus.jcjboard.util.InputValueHandler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,16 +15,9 @@ import java.io.IOException;
 public class ArticleDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //id값을 파라미터로 받는다
         //파라미터를 검사한다.
-        //id를 Integer로 바꿀수 없다면, (비정상적인 id값)
-        int id;
-        try {
-            id = Integer.parseInt(req.getParameter("id"));
-        } catch (NumberFormatException e) {
-            resp.sendRedirect("/board/list");
-            return;
-        }
+        //id를 Int로 바꿀수 있다면 바꾸고, 없으면 예외처리
+        int id = InputValueHandler.convertToInt("id", req, resp);
 
         //id를 저장하고 req에 저장해둔다.
         req.setAttribute("id", id);
@@ -35,14 +29,8 @@ public class ArticleDeleteServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        //글의 패스워드가 DB에 저장된 패스워드가  맞는지 확인한다.
-        int id;
-        try {
-            id = Integer.parseInt(req.getParameter("id"));
-        } catch (NumberFormatException e) {
-            resp.sendRedirect("/board/list");
-            return;
-        }
+        int id = InputValueHandler.convertToInt("id", req, resp);
+
         String password = req.getParameter("password");
 
         BoardDao boardDao =new BoardDao();

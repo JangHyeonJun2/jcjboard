@@ -2,6 +2,7 @@ package com.fastcampus.jcjboard.servlet;
 
 import com.fastcampus.jcjboard.dao.BoardDao;
 import com.fastcampus.jcjboard.dao.CommentDao;
+import com.fastcampus.jcjboard.util.InputValueHandler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -17,14 +18,7 @@ public class ArticleUpdateServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BoardDao boardDao = new BoardDao();
-        int id;
-        try {
-            id = Integer.parseInt(req.getParameter("id"));
-        } catch (NumberFormatException e) {
-            resp.sendRedirect("/board/read");
-            /*id값이 제대로 들어갔는지 확인하기 = 본래의 글로 리다이렉트가 잘 되는지*/
-            return;
-        }
+        int id = InputValueHandler.convertToInt("id", req, resp);
 
         req.setAttribute("articleVO",boardDao.getArticleVO(id));
 
@@ -36,19 +30,22 @@ public class ArticleUpdateServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         BoardDao boardDao = new BoardDao();
-        int id;
-        try {
-            id = Integer.parseInt(req.getParameter("id"));
-        } catch (NumberFormatException e) {
-            resp.sendRedirect("/board/read");
-            /*id값이 제대로 들어갔는지 확인하기 = 본래의 글로 리다이렉트가 잘 되는지*/
-            return;
-        }
+        int id = InputValueHandler.convertToInt("id", req, resp);
+
         String name = req.getParameter("nickname");
         String title = req.getParameter("title");
         String content = req.getParameter("content");
         String password = req.getParameter("password");
         String date = req.getParameter("date");
+
+        //입력정보를 검사한다.
+        //문자열 입력정보중 어느하나라도 ""(빈칸)이거나 null이라면, 에러페이지로 리다이렉트한다.
+        if (InputValueHandler.isEmpty(name, title, content, password, date)) {
+            System.out.println("문자열 에러발생");
+            resp.sendRedirect("/board/error");
+            return;
+        }
+
 
         ArticleVO articleVO = new ArticleVO(id, title, content, date, name);
 
@@ -64,10 +61,10 @@ public class ArticleUpdateServlet extends HttpServlet {
             return;
         }
 
-        req.setAttribute("articleVO", articleVO);
-
         CommentDao commentDao = new CommentDao();
         List<CommentVO> commentList = commentDao.getCommentList(id);
+
+        req.setAttribute("articleVO", articleVO);
         req.setAttribute("commentList",commentList);
 
         RequestDispatcher dispatcher =
