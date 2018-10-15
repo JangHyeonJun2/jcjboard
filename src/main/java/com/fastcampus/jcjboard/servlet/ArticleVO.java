@@ -1,29 +1,34 @@
 package com.fastcampus.jcjboard.servlet;
 
-import java.time.LocalDateTime;
-
-public class BoardDO {
+public class ArticleVO {
     private int id;
     private  String title;
     private  String content;
-    private LocalDateTime date;
+    private String date;
     private String password;
     private String nickname;
-    public BoardDO(){
+    private int commentCount = 0;
+    private int viewCount;
+
+    public ArticleVO(){
 
     }
-    /*
-    public BoardDO(int id,String title,String content){
-        this.id = id;
+
+    public ArticleVO(String title, String content, String nickname) {
         this.title = title;
         this.content = content;
-    }
-    */
-    public BoardDO(String title, String content, String password, String nickname) {
-        this.title = title;
-        this.content = content;
-        this.password = password;
         this.nickname = nickname;
+    }
+
+    public ArticleVO(String title, String content, String password, String nickname) {
+        this(title, content, nickname);
+        this.password = password;
+    }
+
+    public ArticleVO(int id, String title, String content, String date, String nickname) {
+        this(title, content, nickname);
+        this.id = id;
+        this.date = date;
     }
 
     public int getId() {
@@ -38,7 +43,7 @@ public class BoardDO {
         return content;
     }
 
-    public LocalDateTime getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -62,7 +67,7 @@ public class BoardDO {
         this.content = content;
     }
 
-    public void setDate(LocalDateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -72,5 +77,21 @@ public class BoardDO {
 
     public void setNickname(String nickname) {
         this.nickname = nickname;
+    }
+
+    public int getCommentCount() {
+        return commentCount;
+    }
+
+    public void setCommentCount(int commentCount) {
+        this.commentCount = commentCount;
+    }
+
+    public int getViewCount() {
+        return viewCount;
+    }
+
+    public void setViewCount(int viewCount) {
+        this.viewCount = viewCount;
     }
 }

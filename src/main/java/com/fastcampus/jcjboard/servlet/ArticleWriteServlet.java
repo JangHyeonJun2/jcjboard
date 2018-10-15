@@ -1,6 +1,6 @@
 package com.fastcampus.jcjboard.servlet;
 
-import com.fastcampus.jcjboard.dao.BoardDaoWrite;
+import com.fastcampus.jcjboard.dao.BoardDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,11 +11,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/board/write")
-public class BoardWriteServlet extends HttpServlet {
+public class ArticleWriteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //쓰기 화면을 보여주는 boardwrite.jsp로 포워딩
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/boardwrite.jsp");//실제 WAS환경에서는 root다음에 바로 /WEB-INF가 존재한다.
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/articleWrite.jsp");
         dispatcher.forward(req, resp);
     }
 
@@ -29,18 +29,18 @@ public class BoardWriteServlet extends HttpServlet {
         String content = req.getParameter("content");
 
         //입력정보를 검사한다.
-        //입력정보중 어느하나라도 널이라면, 바로 리다이렉트한다.
-        if (nickName == null || title == null || password == null || content == null) {
+        //입력정보중 어느하나라도 ""(빈칸)이라면, 바로 리다이렉트한다.
+        if (nickName == "" || title == "" || password == "" || content == "") {
             resp.sendRedirect("/board/list");
             return;
         }
 
         //입력정보를 받아 BoardDO를 생성한다
-        BoardDO boardDO = new BoardDO(title,content,password,nickName);
+        ArticleVO articleVO = new ArticleVO(title,content,password,nickName);
 
         //DB에 저장한다.
-        BoardDaoWrite boardDaoWrite = new BoardDaoWrite();
-        boardDaoWrite.addBoardDO(boardDO);
+        BoardDao boardDao = new BoardDao();
+        boardDao.addArticleVO(articleVO);
 
         //게시판 목록으로 리다이렉트한다.
         resp.sendRedirect("/board/list");

@@ -1,6 +1,6 @@
 package com.fastcampus.jcjboard.servlet;
 
-import com.fastcampus.jcjboard.dao.BoardDaoDelete;
+import com.fastcampus.jcjboard.dao.BoardDao;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @WebServlet("/board/delete")
-public class BoardDeleteServlet extends HttpServlet {
+public class ArticleDeleteServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //id값을 파라미터로 받는다
@@ -29,7 +29,7 @@ public class BoardDeleteServlet extends HttpServlet {
         req.setAttribute("id", id);
 
         //비밀번호 입력페이지로 포워딩한다.
-        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/delete.jsp");
+        RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/articleDelete.jsp");
         dispatcher.forward(req,resp);
     }
 
@@ -37,14 +37,26 @@ public class BoardDeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //글의 패스워드가 DB에 저장된 패스워드가  맞는지 확인한다.
         String password = req.getParameter("password");
-        int id = Integer.parseInt(req.getParameter("id"));
+        int id = 0;
+        try {
+            id = Integer.parseInt(req.getParameter("id"));
+        } catch (NumberFormatException e) {
+            resp.sendRedirect("/board/list");
+            return;
+        }
 
-        BoardDaoDelete boardDaoDelete =new BoardDaoDelete();
+        BoardDao boardDaoDelete =new BoardDao();
         String DBpassword = boardDaoDelete.getDbPassword(id);
 
-        if (password.equals(DBpassword)) {
+        if (!password.equals(DBpassword)) {
+            //패스워드가 틀린경우 다시 포워딩한다.
+            req.setAttribute("unvalidPassword",true);
+            req.setAttribute("id",id);
+            RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/articleDelete.jsp");
+            dispatcher.forward(req,resp);
+        } else if (password.equals(DBpassword)) {
             //패스워드가 맞다면, 해당 DB를 삭제한다.
-            boardDaoDelete.deleteDB(id);
+            boardDaoDelete.deleteArticleVO(id);
         }
 
         //게시판 목록으로 리다이렉트한다.

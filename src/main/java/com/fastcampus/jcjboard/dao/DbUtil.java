@@ -1,8 +1,7 @@
 package com.fastcampus.jcjboard.dao;
 
-import com.fastcampus.jcjboard.servlet.GetPropertyValue;
+import com.fastcampus.jcjboard.util.DbConfProperty;
 
-import java.io.IOException;
 import java.sql.*;
 
 public class DbUtil {
@@ -10,21 +9,14 @@ public class DbUtil {
         throws RuntimeException {
 
         Connection conn = null;
-        //DBConfiguration dbConfiguration = DBConfiguration.getInstance();
-        GetPropertyValue getPropertyValue = new GetPropertyValue();
-        try {
-            getPropertyValue.getPropValues();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
 
-            Class.forName(getPropertyValue.getDbDriver());
+        DbConfProperty dbConfProperty = DbConfProperty.getInstance();
 
-           // Class.forName(getPropertyValue.getDbDriver());
+        try {
+            Class.forName(dbConfProperty.getDbDriver());
 
             conn = DriverManager.getConnection(dbUrl,dbId,dbPassword);
-            System.out.println(dbUrl+","+dbId+","+dbPassword);
+
 
         }catch (Exception ex) {
             throw new RuntimeException();
