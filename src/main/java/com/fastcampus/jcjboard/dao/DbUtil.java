@@ -11,14 +11,9 @@ public class DbUtil {
 
         Connection conn = null;
 
-        DbConfProperty dbConfProperty = new DbConfProperty();
-        try {
-            dbConfProperty.getPropValues();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
+        DbConfProperty dbConfProperty = DbConfProperty.getInstance();
 
+        try {
             Class.forName(dbConfProperty.getDbDriver());
 
             conn = DriverManager.getConnection(dbUrl,dbId,dbPassword);

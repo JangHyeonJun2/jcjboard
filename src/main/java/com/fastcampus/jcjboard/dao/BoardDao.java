@@ -11,26 +11,21 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static java.time.LocalTime.now;
+
 public class BoardDao {
     private String dbUrl;
     private String dbId;
     private String dbPassword;
 
-    public BoardDao() {
-        DbConfProperty dbConfProperty = new DbConfProperty();
 
-        try {
-            dbConfProperty.getPropValues();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public BoardDao() {
+        DbConfProperty dbConfProperty = DbConfProperty.getInstance();
 
         this.dbUrl = dbConfProperty.getDbUrl();
         this.dbId = dbConfProperty.getDbUser();
         this.dbPassword = dbConfProperty.getDbPassword();
-
     }
-
     /*Read 관련*/
     public ArticleVO getArticleVO(int boardid) {
         Connection conn = null;
@@ -265,7 +260,7 @@ public class BoardDao {
         Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
         String sql = "insert into board(nickname,title,content,regdate,password) values (?,?,?,now(),?)";
         PreparedStatement ps = null;
-
+        System.out.println(now());
         try {
             ps = conn.prepareStatement(sql);
             ps.setString(1, articleVO.getNickname()); //바인딩
