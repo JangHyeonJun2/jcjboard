@@ -20,17 +20,17 @@
 <body style="padding: 20px">
 <div class="ui container">
 <div class="ui container">
-    <c:forEach items="${requestScope.showDetaile}" var="BoardDO">
+
         <div class="ui comments">
             <div class="comment">
                     <%--<a class="avatar">--%>
                     <%--<img src="/images/avatar/small/elliot.jpg">--%>
                     <%--</a>--%>
                 <div class="content">
-                    <a class="author">글쓴이 : ${BoardDO.nickname}</a>
+                    <a class="author">글쓴이 : ${requestScope.showBoardDO.nickname}</a>
                     <div class="metadata">
-                        <%--<div class="date">${BoardDO.date}</div>--%>
-                        <%--<div class="date">${BoardDO.viewCount}</div>--%>
+                        <div class="date">날짜 : ${requestScope.showBoardDO.date}</div>
+                        <div class="date">조회수 ${requestScope.showBoardDO.viewCount}</div>
                     </div>
                 </div>
             </div>
@@ -38,11 +38,11 @@
 
         <div class="ui message">
             <div class="header">
-                    ${BoardDO.title}
+                    ${requestScope.showBoardDO.title}
             </div>
         </div>
-        <div class="ui message" style="min-height: 220px">
-            <p>${BoardDO.content}</p>
+        <div class="ui message" style="min-height: 150px">
+            <p>${requestScope.showBoardDO.content}</p>
         </div>
 
         <div class="ui container">
@@ -56,15 +56,15 @@
                 <i class="icon edit"></i>
                 글쓰기
             </button>
-            <button type="button" onclick="window.location.href='/board/update?id=${BoardDO.id}'" class="right floated ui button">
+            <button type="button" onclick="window.location.href='/board/update?id=${requestScope.showBoardDO.id}'" class="right floated ui button">
                 수정
             </button>
-            <button type="button" onclick="window.location.href='/board/delete?id=${BoardDO.id}'" class="right floated ui button">
+            <button type="button" onclick="window.location.href='/board/delete?id=${requestScope.showBoardDO.id}'" class="right floated ui button">
                 삭제
             </button>
             </div>
         </div>
-    </c:forEach>
+
 </div>
 
 
@@ -94,13 +94,16 @@
                 </div>
             </div>
         </div>
-    </c:forEach>
         <div class="ui divider"></div>
+    </c:forEach>
+<c:if test="${requestScope.get('showComment').size()<=0}">
+        <div class="ui divider"></div>
+</c:if>
         <div style="margin-top:40px" class="ui container">
             <h4 class="ui header">댓글쓰기</h4>
-            <c:forEach items="${requestScope.showDetaile}" var="BoardDO">
+
         <form class="ui reply form" method="post" action="/board/comment/write">
-            <input type="hidden" name="boardid" value="${BoardDO.id}">
+            <input type="hidden" name="boardid" value="${requestScope.showBoardDO.id}">
             <div class="fields">
                 <div class="field">
                     <input type="text" placeholder="닉네임" name="nickname" required>
@@ -120,7 +123,6 @@
             </button>
             </div>
         </form>
-            </c:forEach>
         </div>
     </div>
 </div>

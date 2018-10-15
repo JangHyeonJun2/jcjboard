@@ -29,8 +29,6 @@ public class BoardListServlet extends HttpServlet {
             id = Integer.parseInt(req.getParameter("page"));
         }
 
-
-
         BoardDaoList dao = new BoardDaoList();
 
         // SQL limit 써서. 한 페이지당 게시글 출력 개수 조정하기!!!!!!!!!!

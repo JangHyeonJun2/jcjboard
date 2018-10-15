@@ -20,13 +20,22 @@
 <body>
 <div class="ui container">
     <form class="ui form" method="post" accept-charset="UTF-8" action="/board/update">
-        <c:forEach items="${requestScope.showDetaile}" var="BoardDO">
-        <input type="hidden" name="id" value="${BoardDO.id}"> <br>
+
+        <input type="hidden" name="id" value="${requestScope.showBoardDO.id}"> <br>
         <div class="ui equal width form">
+            <c:if test="${requestScope.get('unvalidPassword')}">
+                <div class="ui negative message">
+                    <i class="close icon"></i>
+                    <div class="header">
+                        비밀번호가 맞지 않습니다.
+                    </div>
+                    <p>다시 시도해주세요.</p>
+                </div>
+            </c:if>
             <div class="fields">
                 <div class="field">
                     <label>닉네임</label>
-                    <input type="text" value="${BoardDO.nickname}" placeholder="닉네임" name="nickname"  required>
+                    <input type="text" value="${requestScope.showBoardDO.nickname}" placeholder="닉네임" name="nickname"  required>
                 </div>
                 <div class="field">
                     <label>비밀번호</label>
@@ -35,11 +44,11 @@
             </div>
             <div class="field">
                 <label>제목</label>
-                <input type="text" value="${BoardDO.title}" placeholder="제목을 입력해주세요." name="title" required>
+                <input type="text" value="${requestScope.showBoardDO.title}" placeholder="제목을 입력해주세요." name="title" required>
             </div>
             <div class="field">
                 <label>내용</label>
-                <textarea placeholder="내용을 입력해주세요." id="content" name="content" required>${BoardDO.content}</textarea>
+                <textarea placeholder="내용을 입력해주세요." id="content" name="content" required>${requestScope.showBoardDO.content}</textarea>
             </div>
 
             <div>
@@ -47,11 +56,11 @@
                     <i class="icon edit"></i>
                     등록
                 </button>
-                <button type="button" onclick="window.location.href='/board/list'" class="right floated ui button">
+                <button type="button" onclick="window.location.href='/board/read?id=${requestScope.showBoardDO.id}'" class="right floated ui button">
                     취소
                 </button>
             </div>
-    </c:forEach>
+
         </div>
     </form>
 </div>

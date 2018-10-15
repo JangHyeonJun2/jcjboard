@@ -4,11 +4,10 @@ import com.fastcampus.jcjboard.servlet.BoardDO;
 import com.fastcampus.jcjboard.servlet.GetPropertyValue;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.lang.String;
 public class BoardDaoRead {
@@ -36,71 +35,47 @@ public class BoardDaoRead {
     }
 
 
-    public List<BoardDO> getBoardList() {
-        List<BoardDO> list = new ArrayList<>();
+    public BoardDO getBoardDO(int boardid) {
         Connection conn = null;
         PreparedStatement ps = null;
         ResultSet rs = null;
+        BoardDO board = new BoardDO();
 
         try {
-
             conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-            String sql = "select boardid,nickname,title,content from board";
+            String sql = "SELECT boardid, nickname, title, content, regdate, view FROM board WHERE boardid=?";
             ps = conn.prepareStatement(sql);
+            ps.setInt(1,boardid);
             rs = ps.executeQuery();
 
             while (rs.next()) {
-                BoardDO board = new BoardDO();
                 board.setId(rs.getInt(1));
                 board.setNickname(rs.getString(2));
                 board.setTitle(rs.getString(3));
                 board.setContent(rs.getString(4));
-                list.add(board);
+
+                SimpleDateFormat ft =
+                        new SimpleDateFormat("yyyy.MM.dd");
+                Timestamp date2 = rs.getTimestamp(5);
+
+                // 오늘 날짜면은 시간만 표시, 오늘 이전이면 날짜만 표시
+                java.util.Date today = new Date();
+                if (ft.format(today).equals(ft.format(date2))) {
+                    ft = new SimpleDateFormat("a hh:mm");
+                } else {
+                    ft = new SimpleDateFormat("yy.MM.dd");
+                }
+
+                board.setDate(ft.format(date2));
+
+                board.setViewCount(rs.getInt(6));
             }
 
-
-        } catch (Exception ex) {
-            ex.printStackTrace();
-        } finally {
-            DbUtil.close(conn, ps, rs);
-        }
-
-        return list;
-    }
-
- //두번쨰
-    public List<BoardDO> getBoardList(String sql) {
-        List<BoardDO> list = new ArrayList<>();
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-
-
-        try {
-
-
-            conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-            //String sql ="select boardid,nickname,title,content from board";
-
-            ps = conn.prepareStatement(sql);
-            rs = ps.executeQuery();
-            BoardDO board = null;
-            while (rs.next()) {
-                board = new BoardDO();
-                board.setId(rs.getInt(1));
-                board.setNickname(rs.getString(2));
-                board.setTitle(rs.getString(3));
-                board.setContent(rs.getString(4));
-                list.add(board);
-            }
-
-
-            //조회수증가시키기 add by siyoon
+            //조회수증가시키기
             String viewCountSql = "update board set view=view+1 where boardid=?";
             ps = conn.prepareStatement(viewCountSql);
             ps.setInt(1,board.getId());
             ps.executeUpdate();
-            //add by siyoon
 
 
         } catch (Exception ex) {
@@ -109,51 +84,7 @@ public class BoardDaoRead {
             DbUtil.close(conn, ps, rs);
         }
 
-        return list;
-    }
-
-    public int updateBoardDO(BoardDO boardDO) {
-        int count = 0;
-        Connection conn = null;
-        PreparedStatement ps = null;
-        try {
-            conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-            String sql2 = "update board set  nickname=?,title=?,content=? where boardid=? ";
-            ps = conn.prepareStatement(sql2);
-
-            ps.setString(1, boardDO.getNickname());
-            ps.setString(2, boardDO.getTitle());
-            ps.setString(3, boardDO.getContent());
-            ps.setInt(4, boardDO.getId());
-            count = ps.executeUpdate();
-        } catch (SQLException sqle) {
-            sqle.printStackTrace();
-        } finally {
-            DbUtil.close(conn, ps);
-        }
-        return count;
-    }
-    public boolean getpassword(BoardDO boardDO){
-        Connection conn = null;
-        PreparedStatement ps = null;
-        String sqlpassword="";
-        boolean value = false;
-        try{
-            conn = DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql3 = "select password from board where boardid="+boardDO.getId();
-            ps = conn.prepareStatement(sql3);
-            ResultSet rs = ps.executeQuery(sql3);
-            if(rs.next()){
-                sqlpassword = rs.getString(1);
-            }
-            if(sqlpassword.equals(boardDO.getPassword()))
-                value= true;
-            else
-                value= false;
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-        return value;
+        return board;
     }
 
 }
