@@ -114,8 +114,8 @@ public class BoardDao {
             ps = conn.prepareStatement(sql);
 
             // 0~ 10까지만 가져오기.
-            ps.setInt(1,paging2.getPerPage().getPageStart());
-            ps.setInt(2,paging2.getPerPage().getPerPageNum());
+            ps.setInt(1,paging2.getPageStart());
+            ps.setInt(2,paging2.getPerPageNum());
             rs = ps.executeQuery();
 
             while(rs.next()) {
