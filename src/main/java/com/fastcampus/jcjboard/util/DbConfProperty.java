@@ -6,28 +6,42 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class DbConfProperty {
-    InputStream inputStream;
-    String DbUrl;
-    String DbUser;
-    String DbPassword;
-    String DbDriver;
-    public void getPropValues() throws IOException{
+
+    private String DbUrl;
+    private String DbUser;
+    private String DbPassword;
+    private String DbDriver;
+
+    private static DbConfProperty dbConfProperty = new DbConfProperty();
+
+    public static DbConfProperty getInstance(){
+        return dbConfProperty;
+    }
+    private DbConfProperty(){
         Properties properties = new Properties();
         String proFileName = "DbConf";
-
-        inputStream = getClass().getClassLoader().getResourceAsStream(proFileName);
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream(proFileName);
 
         if(inputStream != null){
-            properties.load(inputStream);
+            try {
+                properties.load(inputStream);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }else{
-            throw new FileNotFoundException("property file" + proFileName + " not found in the classpath");
+            try {
+                throw new FileNotFoundException("property file" + proFileName + " not found in the classpath");
+            } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
         }
         DbUrl = properties.getProperty("dbUrl");
         DbUser = properties.getProperty("dbId");
         DbPassword = properties.getProperty("dbPassword");
         DbDriver = properties.getProperty("dbDriver");
-
     }
+
+
     public String getDbUrl(){
         return DbUrl;
     }
@@ -40,4 +54,6 @@ public class DbConfProperty {
     public String getDbDriver(){
         return DbDriver;
     }
+    public Class<DbConfProperty> getClassName(){return DbConfProperty.class;}
+
 }

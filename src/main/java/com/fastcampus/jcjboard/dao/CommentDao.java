@@ -15,13 +15,8 @@ public class CommentDao {
     private String dbPassword;
 
     public CommentDao() {
-        DbConfProperty dbConfProperty = new DbConfProperty();
+        DbConfProperty dbConfProperty = DbConfProperty.getInstance();
 
-        try {
-            dbConfProperty.getPropValues();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
         this.dbUrl = dbConfProperty.getDbUrl();
         this.dbId = dbConfProperty.getDbUser();
         this.dbPassword = dbConfProperty.getDbPassword();
