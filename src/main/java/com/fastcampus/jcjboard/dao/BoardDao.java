@@ -4,7 +4,7 @@ import com.fastcampus.jcjboard.paging.Paging;
 import com.fastcampus.jcjboard.servlet.ArticleVO;
 import com.fastcampus.jcjboard.util.DbConfProperty;
 
-import java.io.IOException;
+
 import java.sql.*;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

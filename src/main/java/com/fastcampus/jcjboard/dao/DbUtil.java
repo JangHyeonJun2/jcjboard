@@ -2,7 +2,6 @@ package com.fastcampus.jcjboard.dao;
 
 import com.fastcampus.jcjboard.util.DbConfProperty;
 
-import java.io.IOException;
 import java.sql.*;
 
 public class DbUtil {
