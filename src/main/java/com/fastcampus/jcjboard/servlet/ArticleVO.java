@@ -1,4 +1,5 @@
 package com.fastcampus.jcjboard.servlet;
+
 public class ArticleVO {
     private int id;
     private  String title;

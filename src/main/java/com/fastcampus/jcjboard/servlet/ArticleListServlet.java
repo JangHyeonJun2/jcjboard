@@ -25,6 +25,7 @@ public class ArticleListServlet extends HttpServlet {
 
         // 최초에 index.html 에서 넘어오면 page 값이 null 이다
         // 이후에 paging 부분의 [2].[3]을 누르면 그 인덱스가 id 로 저장이 되게 만들었어!
+
         if(req.getParameter("page") != null) {
             id = Integer.parseInt(req.getParameter("page"));
         }
@@ -42,7 +43,6 @@ public class ArticleListServlet extends HttpServlet {
         paging.setPerPage(perPage);
         paging.setTotalCount(dao.getArticleListTotalCount());
 
-
         // getBoardListPerPage() 안에 불러와야할 게시글의 수 지정해주기. (시작지점, 갯수)
         // Paging 클래스 안의 PerPage 클래스 이용하면 시작지점, 갯수 다 구할 수 있다.
         List<ArticleVO> articleVOList = dao.getArticleListPerPage(paging);
@@ -51,9 +51,9 @@ public class ArticleListServlet extends HttpServlet {
         //int totalCount = list.size();
 
         /*add by siyoon - 해당글의 댓글 숫자를 출력하기 위해서 추가함*/
-        for (ArticleVO bdo : articleVOList) {
-            int commentCount = dao.getCommentCount(bdo.getId());
-            bdo.setCommentCount(commentCount);
+        for (ArticleVO articleVO : articleVOList) {
+            int commentCount = dao.getCommentCount(articleVO.getId());
+            articleVO.setCommentCount(commentCount);
         }
 
         req.setAttribute("articleVOList" , articleVOList);
