@@ -30,7 +30,7 @@ public class ArticleWriteServlet extends HttpServlet {
 
         //입력정보를 검사한다.
         //입력정보중 어느하나라도 ""(빈칸)이라면, 바로 리다이렉트한다.
-        if (nickName == "" || title == "" || password == "" || content == "") {
+        if (nickName.equals("") || title.equals("") || password.equals("") || content.equals("")) {
             resp.sendRedirect("/board/list");
             return;
         }

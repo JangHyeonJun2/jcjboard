@@ -18,7 +18,7 @@ public class ArticleReadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BoardDao boardDao = new BoardDao();
 
-        int id = 0;
+        int id;
         try {
             id = Integer.parseInt(req.getParameter("id"));
         } catch (NumberFormatException e) {

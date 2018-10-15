@@ -17,7 +17,7 @@ public class ArticleDeleteServlet extends HttpServlet {
         //id값을 파라미터로 받는다
         //파라미터를 검사한다.
         //id를 Integer로 바꿀수 없다면, (비정상적인 id값)
-        int id = 0;
+        int id;
         try {
             id = Integer.parseInt(req.getParameter("id"));
         } catch (NumberFormatException e) {
@@ -37,7 +37,7 @@ public class ArticleDeleteServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //글의 패스워드가 DB에 저장된 패스워드가  맞는지 확인한다.
         String password = req.getParameter("password");
-        int id = 0;
+        int id;
         try {
             id = Integer.parseInt(req.getParameter("id"));
         } catch (NumberFormatException e) {
