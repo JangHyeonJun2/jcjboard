@@ -4,7 +4,7 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
-public class BoardDO {
+public class ArticleVO {
     private int id;
     private  String title;
     private  String content;
@@ -14,15 +14,25 @@ public class BoardDO {
     private int commentCount = 0;
     private int viewCount;
 
-    public BoardDO(){
+    public ArticleVO(){
 
     }
 
-    public BoardDO(String title, String content, String password, String nickname) {
+    public ArticleVO(String title, String content, String nickname) {
         this.title = title;
         this.content = content;
-        this.password = password;
         this.nickname = nickname;
+    }
+
+    public ArticleVO(String title, String content, String password, String nickname) {
+        this(title, content, nickname);
+        this.password = password;
+    }
+
+    public ArticleVO(int id, String title, String content, String date, String nickname) {
+        this(title, content, nickname);
+        this.id = id;
+        this.date = date;
     }
 
     public int getId() {

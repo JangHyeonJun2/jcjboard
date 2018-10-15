@@ -1,7 +1,7 @@
 package com.fastcampus.jcjboard.servlet;
 
-import com.fastcampus.jcjboard.dao.CommentDaoWrite;
-import javax.servlet.RequestDispatcher;
+import com.fastcampus.jcjboard.dao.CommentDao;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +25,7 @@ public class CommentWriteServlet extends HttpServlet {
 
         //파라미터 검사
         //입력정보중 어느하나라도 널이라면, 바로 리다이렉트한다.
-        if (nickName == null || req.getParameter("boardid") == null || password == null || content == null) {
+        if (nickName == "" || req.getParameter("boardid") == "" || password == "" || content == "") {
             resp.sendRedirect("/board/list");
             return;
         }
@@ -35,8 +35,8 @@ public class CommentWriteServlet extends HttpServlet {
         CommentVO commentVO = new CommentVO(content,password,nickName,boardid);
 
         //DB에저장
-        CommentDaoWrite commentDaoWrite = new CommentDaoWrite();
-        commentDaoWrite.addComment(commentVO);
+        CommentDao commentDao = new CommentDao();
+        commentDao.addComment(commentVO);
 
         //해당 글로 리다이렉트
         resp.sendRedirect("/board/read?id="+boardid);
