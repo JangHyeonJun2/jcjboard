@@ -1,22 +1,8 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: choijaeyong
-  Date: 11/10/2018
-  Time: 12:14 PM
-  To change this template use File | Settings | File Templates.
---%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.css">
-    <script
-            src="https://code.jquery.com/jquery-3.1.1.min.js"
-            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-            crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.3.3/semantic.min.js"></script>
-
-
+    <jsp:include page="head.jsp" flush="false"/>
     <title>게시판 - 댓글 수정</title>
 </head>
 <body style="padding-top:40px">
@@ -38,6 +24,7 @@
 
         <input type="hidden" name="commentid" value="${comment.commentid}"/>
         <input type="hidden" name="boardid" value="${comment.boardid}"/>
+        <input type="hidden" name="date" value="${comment.date}"/>
         <h4 class="ui header">댓글 수정하기</h4>
         <div class="fields">
             <div class="field">

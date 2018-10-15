@@ -22,15 +22,16 @@ public class CommentDao {
 
 
 
-    public int deleteComment(int commentid) {
+    public int deleteComment(int commentid,String password) {
         int count =0;
-        String sql = "DELETE FROM comment WHERE commentid = ?";
+        String sql = "DELETE FROM comment WHERE commentid = ? AND password = ?";
         Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
         PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1,commentid);
+            ps.setString(2,password);
             count = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -38,32 +39,6 @@ public class CommentDao {
             DbUtil.close(conn,ps);
         }
         return count;
-    }
-
-    public String getCommentPassword(int commentid) {
-        Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        String DBpassword = null;
-
-        String sql = "select password from comment where commentid=?";
-
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1,commentid);
-
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                DBpassword = rs.getString(1);
-
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DbUtil.close(conn,ps,rs);
-        }
-
-        return DBpassword;
     }
 
     /*commentDaoRead관련*/
@@ -76,7 +51,7 @@ public class CommentDao {
 
         try{
             conn =DbUtil.connect(dbUrl,dbId,dbPassword);
-            String sql = "select commentid,nickname,content,regdate,password,boardid from comment where boardid=?";
+            String sql = "SELECT commentid,nickname,content,regdate,password,boardid FROM comment WHERE boardid=?";
 
             ps = conn.prepareStatement(sql);
             ps.setInt(1,id);
@@ -121,7 +96,7 @@ public class CommentDao {
         try {
 
             conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-            String sql = "select commentid,nickname,content,regdate,boardid from comment where commentid=?";
+            String sql = "SELECT commentid,nickname,content,regdate,boardid FROM comment WHERE commentid=?";
             ps = conn.prepareStatement(sql);
             ps.setInt(1,commentid);
             rs = ps.executeQuery();
@@ -147,18 +122,19 @@ public class CommentDao {
         return comment;
     }
 
-    public int updateComment(CommentVO commentVO) {
+    public int updateComment(CommentVO commentVO,String password) {
         int count=0;
         Connection conn = null;
         PreparedStatement ps = null;
         try {
             conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-            String sql = "update comment set nickname=?, content=? , regdate=now() where commentid=? ";
+            String sql = "UPDATE comment SET nickname=?, content=? , regdate=now() WHERE commentid=? AND password=?";
             ps = conn.prepareStatement(sql);
 
             ps.setString(1, commentVO.getNickname());
             ps.setString(2, commentVO.getContent());
             ps.setInt(3, commentVO.getCommentid());
+            ps.setString(4,password);
             count = ps.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
