@@ -2,6 +2,7 @@ package com.fastcampus.jcjboard.servlet;
 
 import com.fastcampus.jcjboard.dao.BoardDao;
 import com.fastcampus.jcjboard.dao.CommentDao;
+import com.fastcampus.jcjboard.util.InputValueHandler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,21 +19,14 @@ public class ArticleReadServlet extends HttpServlet {
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         BoardDao boardDao = new BoardDao();
 
-        int id = 0;
-        try {
-            id = Integer.parseInt(req.getParameter("id"));
-        } catch (NumberFormatException e) {
-            //id가 정수가 아닌경우 목록으로 리다이렉트
-            resp.sendRedirect("/board/list");
-            return;
-        }
+        int id = InputValueHandler.convertToInt("id", req, resp);
 
         ArticleVO articleVO = boardDao.getArticleVO(id);
 
-        req.setAttribute("articleVO", articleVO);
-
         CommentDao commentDao = new CommentDao();
         List<CommentVO> commentList = commentDao.getCommentList(id);
+
+        req.setAttribute("articleVO", articleVO);
         req.setAttribute("commentList",commentList);
 
         RequestDispatcher dispatcher =

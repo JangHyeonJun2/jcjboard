@@ -1,9 +1,5 @@
 package com.fastcampus.jcjboard.servlet;
 
-import java.sql.Time;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
 public class ArticleVO {
     private int id;
     private  String title;

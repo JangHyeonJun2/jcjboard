@@ -1,6 +1,7 @@
 package com.fastcampus.jcjboard.servlet;
 
 import com.fastcampus.jcjboard.dao.BoardDao;
+import com.fastcampus.jcjboard.util.InputValueHandler;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,9 +30,9 @@ public class ArticleWriteServlet extends HttpServlet {
         String content = req.getParameter("content");
 
         //입력정보를 검사한다.
-        //입력정보중 어느하나라도 ""(빈칸)이라면, 바로 리다이렉트한다.
-        if (nickName == "" || title == "" || password == "" || content == "") {
-            resp.sendRedirect("/board/list");
+        //문자열 입력정보중 어느하나라도 ""(빈칸)이거나 null이라면, 에러페이지로 리다이렉트한다.
+        if (InputValueHandler.isEmpty(nickName, title, password, content)) {
+            resp.sendRedirect("/board/error");
             return;
         }
 
