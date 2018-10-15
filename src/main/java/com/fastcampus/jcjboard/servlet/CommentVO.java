@@ -1,7 +1,5 @@
 package com.fastcampus.jcjboard.servlet;
 
-import java.time.LocalDateTime;
-
 public class CommentVO {
     private int commentid;
     private int boardid;
