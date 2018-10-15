@@ -22,10 +22,7 @@ public class DbUtil {
             Class.forName(getPropertyValue.getDbDriver());
 
             conn = DriverManager.getConnection(dbUrl,dbId,dbPassword);
-<<<<<<< HEAD
 
-=======
->>>>>>> 7610866aa8aa9b0daf8b35889a6ddcc5d16689a9
 
         }catch (Exception ex) {
             throw new RuntimeException();
