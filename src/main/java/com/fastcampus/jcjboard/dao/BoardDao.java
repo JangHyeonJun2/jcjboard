@@ -79,15 +79,16 @@ public class BoardDao {
     }
 
     /*delete 관련*/
-    public int deleteArticleVO(int boardid) {
+    public int deleteArticleVO(int boardid, String password) {
         int count =0;
-        String sql = "DELETE FROM board WHERE boardid = ?";
+        String sql = "DELETE FROM board WHERE boardid = ? AND password = ?";
         Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
         PreparedStatement ps = null;
 
         try {
             ps = conn.prepareStatement(sql);
             ps.setInt(1,boardid);
+            ps.setString(2,password);
             count = ps.executeUpdate();
         } catch (SQLException e) {
             e.printStackTrace();
@@ -95,31 +96,6 @@ public class BoardDao {
             DbUtil.close(conn,ps);
         }
         return count;
-    }
-
-    public String getDbPassword(int boardid) {
-        Connection conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        String DBpassword = null;
-
-        String sql = "select password from board where boardid=?";
-
-        try {
-            ps = conn.prepareStatement(sql);
-            ps.setInt(1,boardid);
-
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                DBpassword = rs.getString(1);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        } finally {
-            DbUtil.close(conn,ps,rs);
-        }
-
-        return DBpassword;
     }
 
     /*List 관련*/
@@ -231,19 +207,20 @@ public class BoardDao {
     }
 
     /*Update 관련*/
-    public int updateArticleVO(ArticleVO articleVO) {
+    public int updateArticleVO(ArticleVO articleVO,String password) {
         int count = 0;
         Connection conn = null;
         PreparedStatement ps = null;
         try {
             conn = DbUtil.connect(dbUrl, dbId, dbPassword);
-            String sql2 = "update board set  nickname=?,title=?,content=? where boardid=? ";
+            String sql2 = "update board set  nickname=?,title=?,content=? where boardid=? AND password = ?";
             ps = conn.prepareStatement(sql2);
 
             ps.setString(1, articleVO.getNickname());
             ps.setString(2, articleVO.getTitle());
             ps.setString(3, articleVO.getContent());
             ps.setInt(4, articleVO.getId());
+            ps.setString(5, password);
             count = ps.executeUpdate();
         } catch (SQLException sqle) {
             sqle.printStackTrace();

@@ -52,27 +52,28 @@ public class ArticleUpdateServlet extends HttpServlet {
 
         ArticleVO articleVO = new ArticleVO(id, title, content, date, name);
 
-        String dBpassword= boardDao.getDbPassword(articleVO.getId());
+        //패스워드가 달라서 정상적으로 처리되지 않은 경우
+        //(업데이트가 정상적으로 수행된경우 1건수정하므로 처리결과가 1이상이여야함)
+        if(boardDao.updateArticleVO(articleVO,password)<=0){
+            req.setAttribute("unvalidPassword",true);
+            req.setAttribute("articleVO", articleVO);
 
-            if(password.equals(dBpassword)){
-                boardDao.updateArticleVO(articleVO);
-                req.setAttribute("articleVO", articleVO);
+            RequestDispatcher dispatcher =
+                    req.getRequestDispatcher("/WEB-INF/views/articleUpdate.jsp");
+            dispatcher.forward(req,resp);
+            return;
+        }
 
-                CommentDao commentDao = new CommentDao();
-                List<CommentVO> commentList = commentDao.getCommentList(id);
-                req.setAttribute("commentList",commentList);
+        req.setAttribute("articleVO", articleVO);
 
-                RequestDispatcher dispatcher =
-                        req.getRequestDispatcher("/WEB-INF/views/articleRead.jsp");
-                dispatcher.forward(req,resp);
-            }else {
-                req.setAttribute("unvalidPassword",true);
-                req.setAttribute("articleVO", articleVO);
+        CommentDao commentDao = new CommentDao();
+        List<CommentVO> commentList = commentDao.getCommentList(id);
+        req.setAttribute("commentList",commentList);
 
-                RequestDispatcher dispatcher =
-                        req.getRequestDispatcher("/WEB-INF/views/articleUpdate.jsp");
-                dispatcher.forward(req,resp);
-            }
+        RequestDispatcher dispatcher =
+                req.getRequestDispatcher("/WEB-INF/views/articleRead.jsp");
+        dispatcher.forward(req,resp);
+
     }
 
 }

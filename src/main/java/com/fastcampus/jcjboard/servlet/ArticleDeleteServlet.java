@@ -36,7 +36,6 @@ public class ArticleDeleteServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         //글의 패스워드가 DB에 저장된 패스워드가  맞는지 확인한다.
-        String password = req.getParameter("password");
         int id;
         try {
             id = Integer.parseInt(req.getParameter("id"));
@@ -44,19 +43,17 @@ public class ArticleDeleteServlet extends HttpServlet {
             resp.sendRedirect("/board/list");
             return;
         }
+        String password = req.getParameter("password");
 
-        BoardDao boardDaoDelete =new BoardDao();
-        String DBpassword = boardDaoDelete.getDbPassword(id);
+        BoardDao boardDao =new BoardDao();
 
-        if (!password.equals(DBpassword)) {
-            //패스워드가 틀린경우 다시 포워딩한다.
+        //패스워드가 틀린경우 다시 포워딩한다. (삭제를 정상적으로 처리한 경우 리턴값이 1이상임)
+        if (boardDao.deleteArticleVO(id, password)<=0) {
             req.setAttribute("unvalidPassword",true);
             req.setAttribute("id",id);
             RequestDispatcher dispatcher = req.getRequestDispatcher("/WEB-INF/views/articleDelete.jsp");
             dispatcher.forward(req,resp);
-        } else if (password.equals(DBpassword)) {
-            //패스워드가 맞다면, 해당 DB를 삭제한다.
-            boardDaoDelete.deleteArticleVO(id);
+            return;
         }
 
         //게시판 목록으로 리다이렉트한다.
