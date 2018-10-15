@@ -39,6 +39,7 @@ public class BoardUpdateServlet extends HttpServlet {
         String title = req.getParameter("title");
         String content = req.getParameter("content");
         String password = req.getParameter("password");
+        String date = req.getParameter("date");
 
 
             BoardDO boardDO = new BoardDO();
@@ -46,6 +47,7 @@ public class BoardUpdateServlet extends HttpServlet {
             boardDO.setNickname(name);
             boardDO.setTitle(title);
             boardDO.setContent(content);
+            boardDO.setDate(date);
 
             String DBpassword= boardDaoUpdate.getDBpassword(boardDO);
 
