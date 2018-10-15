@@ -32,17 +32,17 @@
             </tr>
             </thead>
             <tbody>
-            <c:forEach items="${requestScope.board}" var="bo">
+            <c:forEach items="${requestScope.articleVOList}" var="articleVO">
                 <tr>
-                    <td class="center aligned">${bo.id}</td>
-                    <td><a href="/board/read?id=${bo.id}"> ${bo.title}
-                        <c:if test="${bo.commentCount > 0}">
-                            <span style="color: dimgray"><small>&nbsp[${bo.commentCount}]</small></span>
+                    <td class="center aligned">${articleVO.id}</td>
+                    <td><a href="/board/read?id=${articleVO.id}"> ${articleVO.title}
+                        <c:if test="${articleVO.commentCount > 0}">
+                            <span style="color: dimgray"><small>&nbsp[${articleVO.commentCount}]</small></span>
                           </c:if>
                     </a></td>
-                    <td class="center aligned">${bo.nickname}</td>
-                    <td class="center aligned">${bo.viewCount}</td>
-                    <td class="center aligned">${bo.date}</td>
+                    <td class="center aligned">${articleVO.nickname}</td>
+                    <td class="center aligned">${articleVO.viewCount}</td>
+                    <td class="center aligned">${articleVO.date}</td>
                 </tr>
             </c:forEach>
 
@@ -97,9 +97,5 @@
 
 
 </div>
-
-
-
-
 </body>
 </html>
