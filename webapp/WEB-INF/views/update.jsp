@@ -22,6 +22,7 @@
     <form class="ui form" method="post" accept-charset="UTF-8" action="/board/update">
 
         <input type="hidden" name="id" value="${requestScope.showBoardDO.id}"> <br>
+        <input type="hidden" name="date" value="${requestScope.showBoardDO.date}"> <br>
         <div class="ui equal width form">
             <c:if test="${requestScope.get('unvalidPassword')}">
                 <div class="ui negative message">
