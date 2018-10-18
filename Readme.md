@@ -17,6 +17,6 @@ This is anonymous bulletin board
 넘어가기 위해서 만들어 놓았습니다.
 - Servlet라는 패키지에는 각 기능들을 모아놓은 패키지입니다.
 
-4. JDBC를 다루기 위한 DBMS 프로퍼티 파일은 resources/DbConf 파일을 수정해주시면 됩니다.
+4 JDBC를 다루기 위한 DBMS 프로퍼티 파일은 resources/DbConf 파일을 수정해주시면 됩니다.
 
 **_환영합니다!_** **익명게시판에** **온것을**
